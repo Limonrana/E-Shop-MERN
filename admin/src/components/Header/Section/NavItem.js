@@ -1,9 +1,10 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { useState } from 'react';
 import { IconContext } from 'react-icons';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 
 const NavItem = ({ item }) => {
+    const { pathname } = useLocation();
     const [openDropDown, setDropDown] = useState(false);
     const handleDropDown = () => {
         setDropDown(!openDropDown);
@@ -57,15 +58,17 @@ const NavItem = ({ item }) => {
                                       : 'js-navbar-vertical-aside-submenu nav nav-sub'
                               }
                           >
-                              <li className="nav-item">
-                                  <NavLink
-                                      className="nav-link "
+                              <li className="nav-item eshop-nav">
+                                  <Link
+                                      className={
+                                          pathname === subItem.path ? 'nav-link active' : 'nav-link'
+                                      }
                                       to={subItem.path}
                                       title={subItem.title}
                                   >
                                       <span className="tio-circle nav-indicator-icon" />
                                       <span className="text-truncate">{subItem.title}</span>
-                                  </NavLink>
+                                  </Link>
                               </li>
                           </ul>
                       ))

@@ -11,12 +11,14 @@ const SalesChart = () => {
                 backgroundColor: '#003680',
                 hoverBackgroundColor: '#003680',
                 borderColor: '#003680',
+                borderWidth: 1,
             },
             {
                 label: 'Orders',
                 data: [150, 230, 382, 204, 169, 290, 300, 100, 300, 225, 120, 150, 230, 382],
                 backgroundColor: '#e7eaf3',
                 borderColor: '#e7eaf3',
+                borderWidth: 1,
             },
         ],
     };
@@ -107,7 +109,7 @@ const SalesChart = () => {
                 <div className="row">
                     <div className="col-md-9 mb-5 mb-md-0">
                         <div className="chartjs-custom mb-4">
-                            <Bar data={data} options={options} />
+                            <Bar data={data} options={options} className="js-chart" height={110} />
                         </div>
 
                         <div className="row justify-content-center">

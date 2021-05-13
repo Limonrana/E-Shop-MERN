@@ -6579,7 +6579,8 @@ svg.passwordIconShow {
 }
 
 button.btn-eshop,
-a.btn.btn-eshop.btn-wide {
+a.btn.btn-eshop.btn-wide,
+.btn-eshop {
   background-color: #003680 !important;
   color: #ffffff !important;
 }
@@ -6602,8 +6603,77 @@ h5.text-hover-primary:hover {
   color: #003680 !important;
 }
 
+a.a-nav-link {
+  color: #003680 !important;
+}
+
+svg.mr-1.productIcons {
+  margin-top: -3px;
+}
+
+.hs-nav-scroller-horizontal .page-header-tabs {
+  margin-bottom: 0px !important;
+}
+
+.table-responsive {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  overflow-y: hidden !important;
+}
+
+select.js-select2-custom {
+  border: none;
+  padding-right: 5px;
+}
+.page-item.active .page-link {
+  z-index: 3;
+  color: #fff;
+  background-color: #003680 !important;
+  border-color: #003680 !important;
+}
+
+.toggle-switch-input:checked + .toggle-switch-label {
+  background-color: #003680 !important;
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+  color: #fff;
+  border-color: #003680 !important;
+  background-color: #003680 !important;
+}
+
+.text-hover-eshop:hover {
+  color: #003680 !important;
+}
+
+.btn-white.active,
+.btn-white.focus,
+.btn-white:active,
+.btn-white:focus,
+.btn-white:hover {
+  color: #003680 !important;
+}
+
+.modal-dialog.modal-dialog-centered {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
 @media screen and (min-device-width: 320px) and (max-device-width: 1199px) {
   .navbar-vertical-aside-show-xl .main .App .Login {
     margin-left: 0rem !important;
   }
+}
+
+::-moz-selection {
+  /* Code for Firefox */
+  color: #ffffff !important;
+  background: #003680 !important;
+}
+
+::selection {
+  color: #ffffff !important;
+  background: #003680 !important;
 }
