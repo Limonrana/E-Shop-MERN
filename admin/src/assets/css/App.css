@@ -6623,10 +6623,59 @@ svg.mr-1.productIcons {
   overflow-y: hidden !important;
 }
 
+.form-check-input:checked {
+  background-color: #003680;
+  border-color: #003680;
+}
+
 select.js-select2-custom {
   border: none;
-  padding-right: 5px;
+  color: gray;
 }
+
+.rdw-editor-toolbar.eshop-toolbar {
+  padding: 0.75rem 1rem;
+  border-top-left-radius: 0.3125rem;
+  border-top-right-radius: 0.3125rem;
+  border: 1px solid #e7eaf3;
+  display: flex;
+  justify-content: flex-start;
+  background: white;
+  flex-wrap: wrap;
+  font-size: 15px;
+  margin-bottom: 5px;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.eshop-editor.rdw-editor-main {
+  min-height: 11rem;
+  border: 1px solid #e7eaf3;
+  border-bottom-right-radius: 0.3125rem;
+  border-bottom-left-radius: 0.3125rem;
+  margin-top: -5px;
+  font-size: 13px;
+  border-top: 0;
+  padding: 0 1rem;
+}
+
+.form-control:read-only {
+  background-color: #ffffff !important;
+  border: 1px solid #e7eaf3;
+}
+
+input.eshop-control-input.form-check-input {
+  font-size: 16px;
+}
+
+.eshop-custom-control {
+  margin-right: 12px !important;
+}
+
+input.eshop-control-input.header-input.form-check-input {
+  margin-top: 2px;
+}
+
 .page-item.active .page-link {
   z-index: 3;
   color: #fff;
@@ -6659,6 +6708,22 @@ select.js-select2-custom {
 .modal-dialog.modal-dialog-centered {
   margin-top: 0px;
   margin-bottom: 0px;
+}
+
+.breadcrumb .breadcrumb-link:hover {
+  color: #ffffff !important;
+}
+
+.breadcrumb .breadcrumb-item {
+  color: #ffffff !important;
+}
+
+a.btn.btn-icon.btn-sm.btn-ghost-white.rounded-circle {
+  color: #fff !important;
+}
+
+a.btn.btn-icon.btn-sm.btn-ghost-white.rounded-circle:hover {
+  color: #677788 !important;
 }
 
 @media screen and (min-device-width: 320px) and (max-device-width: 1199px) {

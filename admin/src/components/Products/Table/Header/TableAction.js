@@ -1,6 +1,9 @@
-const TableAction = ({ hide }) => (
+const TableAction = ({ show }) => (
     <div className="col-lg">
-        <div id="datatableCounterInfo" style={{ display: `${hide}` }}>
+        <div
+            id="datatableCounterInfo"
+            style={{ display: `${show.length !== 0 ? 'block' : 'none'}` }}
+        >
             <div className="d-sm-flex justify-content-lg-end align-items-sm-center">
                 <span className="d-block d-sm-inline-block font-size-sm mr-3 mb-2 mb-sm-0">
                     <span id="datatableCounter">0</span>

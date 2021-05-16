@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import NavData from './NavData';
 import Logo from './Section/Logo';
@@ -10,6 +11,12 @@ const SideNavBar = () => {
         '/admin/reset-password',
         '/admin/email-verification',
     ]);
+    const [dropDownId, setDropDownId] = useState('');
+
+    const handleDropDownId = (id) => {
+        setDropDownId(id);
+    };
+
     return (
         <>
             {!match ? (
@@ -21,7 +28,12 @@ const SideNavBar = () => {
                             <div className="navbar-vertical-content">
                                 <ul className="navbar-nav navbar-nav-lg nav-tabs">
                                     {NavData.map((item) => (
-                                        <NavItem item={item} key={item.id} />
+                                        <NavItem
+                                            item={item}
+                                            key={item.id}
+                                            handleDropDownId={handleDropDownId}
+                                            dropDownId={dropDownId}
+                                        />
                                     ))}
 
                                     <li className="nav-item active">

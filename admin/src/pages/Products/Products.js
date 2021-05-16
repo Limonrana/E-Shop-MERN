@@ -8,11 +8,11 @@ import product2 from '../../assets/img/400x400/img26.jpg';
 import product1 from '../../assets/img/400x400/img4.jpg';
 import ExportModal from '../../components/Modal/ExportModal';
 import UploadModal from '../../components/Modal/UploadModal';
-import DataTable from '../../components/Table/DataTable';
-import Filter from '../../components/Table/Filter/Filter';
-import TableFooter from '../../components/Table/Footer/TableFooter';
-import TableAction from '../../components/Table/Header/TableAction';
-import Pagination from '../../components/Table/Pagination/Pagination';
+import DataTable from '../../components/Products/Table/DataTable';
+import Filter from '../../components/Products/Table/Filter/Filter';
+import TableFooter from '../../components/Products/Table/Footer/TableFooter';
+import TableAction from '../../components/Products/Table/Header/TableAction';
+import Pagination from '../../components/Products/Table/Pagination/Pagination';
 
 const Products = () => {
     // eslint-disable-next-line no-unused-vars
@@ -20,6 +20,7 @@ const Products = () => {
         {
             id: 1,
             name: 'Photive wireless speakers',
+            path: '/admin/products/id',
             image: product1,
             category: 'Electronics',
             seller: 'Google',
@@ -32,6 +33,7 @@ const Products = () => {
         {
             id: 2,
             name: 'Topman shoe',
+            path: '/admin/products/id',
             image: product2,
             category: 'Shoes',
             seller: 'Topman',
@@ -44,6 +46,7 @@ const Products = () => {
         {
             id: 3,
             name: 'Photive wireless speakers',
+            path: '/admin/products/id',
             image: product1,
             category: 'Electronics',
             seller: 'Google',
@@ -56,6 +59,7 @@ const Products = () => {
         {
             id: 4,
             name: 'Topman shoe',
+            path: '/admin/products/id',
             image: product2,
             category: 'Shoes',
             seller: 'Topman',
@@ -68,6 +72,7 @@ const Products = () => {
         {
             id: 5,
             name: 'Photive wireless speakers',
+            path: '/admin/products/id',
             image: product1,
             category: 'Electronics',
             seller: 'Google',
@@ -80,6 +85,7 @@ const Products = () => {
         {
             id: 6,
             name: 'Topman shoe',
+            path: '/admin/products/id',
             image: product2,
             category: 'Shoes',
             seller: 'Topman',
@@ -92,6 +98,7 @@ const Products = () => {
         {
             id: 7,
             name: 'Photive wireless speakers',
+            path: '/admin/products/id',
             image: product1,
             category: 'Electronics',
             seller: 'Google',
@@ -104,6 +111,7 @@ const Products = () => {
         {
             id: 8,
             name: 'Topman shoe',
+            path: '/admin/products/id',
             image: product2,
             category: 'Shoes',
             seller: 'Topman',
@@ -116,6 +124,7 @@ const Products = () => {
         {
             id: 9,
             name: 'Photive wireless speakers',
+            path: '/admin/products/id',
             image: product1,
             category: 'Electronics',
             seller: 'Google',
@@ -128,6 +137,7 @@ const Products = () => {
         {
             id: 10,
             name: 'Topman shoe',
+            path: '/admin/products/id',
             image: product2,
             category: 'Shoes',
             seller: 'Topman',
@@ -140,6 +150,7 @@ const Products = () => {
         {
             id: 11,
             name: 'Photive wireless speakers',
+            path: '/admin/products/id',
             image: product1,
             category: 'Electronics',
             seller: 'Google',
@@ -152,6 +163,7 @@ const Products = () => {
         {
             id: 12,
             name: 'Topman shoe Last',
+            path: '/admin/products/id',
             image: product2,
             category: 'Shoes',
             seller: 'Topman',
@@ -165,6 +177,7 @@ const Products = () => {
     const [showFilter, setShowFilter] = useState(false);
     const [isOpenModal, setOpenModal] = useState(false);
     const [isExportModal, setExportModal] = useState(false);
+    const [selectData, setSelectData] = useState([]);
     const [search, setSearch] = useState('');
     const [filter, setFilter] = useState({
         product: true,
@@ -176,6 +189,17 @@ const Products = () => {
         qty: true,
         variant: true,
     });
+
+    const [headerTitle, setHeaderTitle] = useState([
+        { id: 1, name: 'Product' },
+        { id: 2, name: 'Type' },
+        { id: 3, name: 'Seller' },
+        { id: 4, name: 'Stocks' },
+        { id: 5, name: 'SKU' },
+        { id: 6, name: 'Price' },
+        { id: 7, name: 'Quantity' },
+        { id: 8, name: 'Variants' },
+    ]);
 
     const handleShowFilter = (event) => {
         setShowFilter(!showFilter);
@@ -191,6 +215,29 @@ const Products = () => {
 
     const handleSearch = (event) => {
         setSearch(event.target.value);
+    };
+
+    const handleSelectData = (id) => {
+        const findId = selectData.find((item) => item === id);
+        if (findId) {
+            const newData = selectData.filter((item) => item !== id);
+            setSelectData(newData);
+        } else {
+            setSelectData([...selectData, id]);
+        }
+    };
+
+    const handleAllSelectData = () => {
+        if (selectData.length === 0) {
+            const newProduct = [];
+            // eslint-disable-next-line no-restricted-syntax
+            for (const item of product) {
+                newProduct.push(item.id);
+            }
+            setSelectData(newProduct);
+        } else {
+            setSelectData([]);
+        }
     };
 
     const toggleModal = (e) => {
@@ -296,29 +343,38 @@ const Products = () => {
                 </div>
 
                 <div className="content container-fluid" style={{ marginTop: '-18rem' }}>
-                    <DataTable items={productMemo} filter={filter}>
-                        <TableAction hide="none" />
-                        <Filter
-                            filter={filter}
-                            showFilter={showFilter}
-                            handleShowFilter={handleShowFilter}
-                            handleFilter={handleFilter}
-                            search={search}
-                            handleSearch={handleSearch}
-                        />
-                        <TableFooter
-                            getItemsPerPage={getItemsPerPage}
-                            itemsPerPage={ItemsPerPage}
-                            totalItems={totalItems}
-                        >
-                            <Pagination
-                                total={totalItems}
-                                itemsPerPage={ItemsPerPage}
-                                currentPage={currentPage}
-                                onPageChange={onPageChange}
+                    <div className="card card-body mb-3 mb-lg-5">
+                        <div className="row justify-content-end mb-3">
+                            <Filter
+                                filter={filter}
+                                showFilter={showFilter}
+                                handleShowFilter={handleShowFilter}
+                                handleFilter={handleFilter}
+                                search={search}
+                                handleSearch={handleSearch}
                             />
-                        </TableFooter>
-                    </DataTable>
+                            <TableAction show={selectData} />
+                            <DataTable
+                                items={productMemo}
+                                filter={filter}
+                                selectData={selectData}
+                                handleSelectData={handleSelectData}
+                                handleAllSelectData={handleAllSelectData}
+                            />
+                            <TableFooter
+                                getItemsPerPage={getItemsPerPage}
+                                itemsPerPage={ItemsPerPage}
+                                totalItems={totalItems}
+                            >
+                                <Pagination
+                                    total={totalItems}
+                                    itemsPerPage={ItemsPerPage}
+                                    currentPage={currentPage}
+                                    onPageChange={onPageChange}
+                                />
+                            </TableFooter>
+                        </div>
+                    </div>
                 </div>
                 <UploadModal
                     toggleModal={toggleModal}

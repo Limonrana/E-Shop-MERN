@@ -1,7 +1,8 @@
+/* eslint-disable jsx-a11y/no-onchange */
 const TableFooter = ({ getItemsPerPage, itemsPerPage, totalItems, children }) => {
     const option = [];
     for (let i = itemsPerPage; i <= totalItems; i += itemsPerPage) {
-        option.push(<option>{i}</option>);
+        option.push(<option key={i}>{i}</option>);
     }
     return (
         <div className="card-footer">
@@ -11,7 +12,6 @@ const TableFooter = ({ getItemsPerPage, itemsPerPage, totalItems, children }) =>
                         <span className="mr-2">Showing:</span>
 
                         <select
-                            onBlur
                             className="js-select2-custom"
                             value={itemsPerPage}
                             onChange={() => getItemsPerPage(itemsPerPage)}

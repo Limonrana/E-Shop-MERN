@@ -18,18 +18,22 @@ const NavData = [
         iconeClose: <RiIcons.RiArrowUpSLine />,
         subNav: [
             {
+                id: 1,
                 title: 'Category',
                 path: '/admin/inventory/category',
             },
             {
+                id: 2,
                 title: 'Subcategory',
                 path: '/admin/inventory/subcategory',
             },
             {
+                id: 3,
                 title: 'Discount',
                 path: '/admin/inventory/discount',
             },
             {
+                id: 4,
                 title: 'Stock',
                 path: '/admin/inventory/stock',
             },
@@ -44,10 +48,12 @@ const NavData = [
         iconeClose: <RiIcons.RiArrowUpSLine />,
         subNav: [
             {
+                id: 1,
                 title: 'Products',
                 path: '/admin/products',
             },
             {
+                id: 2,
                 title: 'New Product',
                 path: '/admin/products/add',
             },
@@ -68,10 +74,12 @@ const NavData = [
         iconeClose: <RiIcons.RiArrowUpSLine />,
         subNav: [
             {
+                id: 1,
                 title: 'Customers',
                 path: '/admin/customers',
             },
             {
+                id: 2,
                 title: 'New Customer',
                 path: '/admin/customers/add',
             },
@@ -86,10 +94,12 @@ const NavData = [
         iconeClose: <RiIcons.RiArrowUpSLine />,
         subNav: [
             {
+                id: 1,
                 title: 'Sellers',
                 path: '/admin/sellers',
             },
             {
+                id: 2,
                 title: 'New Seller',
                 path: '/admin/sellers/add',
             },
@@ -116,10 +126,12 @@ const NavData = [
         iconeClose: <RiIcons.RiArrowUpSLine />,
         subNav: [
             {
+                id: 1,
                 title: 'Users',
                 path: '/admin/users',
             },
             {
+                id: 2,
                 title: 'Profile',
                 path: '/admin/profile',
             },
@@ -134,10 +146,12 @@ const NavData = [
         iconeClose: <RiIcons.RiArrowUpSLine />,
         subNav: [
             {
+                id: 1,
                 title: 'Purchase',
                 path: '/admin/purchase',
             },
             {
+                id: 2,
                 title: 'New Purchase',
                 path: '/admin/purchase/add',
             },
@@ -152,10 +166,12 @@ const NavData = [
         iconeClose: <RiIcons.RiArrowUpSLine />,
         subNav: [
             {
+                id: 1,
                 title: 'Sales',
                 path: '/admin/sales',
             },
             {
+                id: 2,
                 title: 'New Sales',
                 path: '/admin/sales/add',
             },

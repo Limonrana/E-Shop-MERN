@@ -17,7 +17,7 @@ const Filter = ({ filter, showFilter, handleShowFilter, handleFilter, search, ha
                             <Input
                                 id="datatableSearch"
                                 type="search"
-                                class="form-control"
+                                className="form-control"
                                 placeholder="Search products..."
                                 value={search}
                                 onChange={handleSearch}

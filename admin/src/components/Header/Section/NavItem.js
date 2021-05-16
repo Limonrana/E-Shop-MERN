@@ -3,12 +3,19 @@ import { useState } from 'react';
 import { IconContext } from 'react-icons';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 
-const NavItem = ({ item }) => {
+const NavItem = ({ item, handleDropDownId, dropDownId }) => {
     const { pathname } = useLocation();
     const [openDropDown, setDropDown] = useState(false);
+
     const handleDropDown = () => {
         setDropDown(!openDropDown);
+        if (item.subNav) {
+            handleDropDownId(item.id);
+        } else {
+            handleDropDownId('');
+        }
     };
+
     let subtitle = null;
     if (item.id === 2 || item.id === 10) {
         subtitle = (
@@ -25,7 +32,7 @@ const NavItem = ({ item }) => {
             {subtitle}
             <li
                 className={
-                    openDropDown
+                    openDropDown && dropDownId === item.id
                         ? 'navbar-vertical-aside-has-menu show'
                         : 'navbar-vertical-aside-has-menu'
                 }
@@ -53,10 +60,11 @@ const NavItem = ({ item }) => {
                     ? item.subNav.map((subItem) => (
                           <ul
                               className={
-                                  openDropDown
+                                  openDropDown && dropDownId === item.id
                                       ? 'js-navbar-vertical-aside-submenu nav nav-sub showCustom'
                                       : 'js-navbar-vertical-aside-submenu nav nav-sub'
                               }
+                              key={subItem.id}
                           >
                               <li className="nav-item eshop-nav">
                                   <Link
