@@ -7,13 +7,14 @@ const NavItem = ({ item, handleDropDownId, dropDownId }) => {
     const { pathname } = useLocation();
     const [openDropDown, setDropDown] = useState(false);
 
-    const handleDropDown = () => {
+    const handleDropDown = (event) => {
         setDropDown(!openDropDown);
-        if (item.subNav) {
+        if (item.subNav && dropDownId !== item.id) {
             handleDropDownId(item.id);
         } else {
             handleDropDownId('');
         }
+        event.preventDefault();
     };
 
     let subtitle = null;
@@ -32,41 +33,64 @@ const NavItem = ({ item, handleDropDownId, dropDownId }) => {
             {subtitle}
             <li
                 className={
-                    openDropDown && dropDownId === item.id
+                    openDropDown && dropDownId
                         ? 'navbar-vertical-aside-has-menu show'
                         : 'navbar-vertical-aside-has-menu'
                 }
-                onClick={handleDropDown}
             >
-                <NavLink
-                    className={
-                        item.subNav
-                            ? 'js-navbar-vertical-aside-menu-link nav-link nav-link-toggle'
-                            : 'js-navbar-vertical-aside-menu-link nav-link'
-                    }
-                    to={item.path}
-                    title="Apps"
-                >
-                    <IconContext.Provider value={{ className: 'nav-icon' }}>
-                        {item.icon}
-                    </IconContext.Provider>
-                    <span className="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">
-                        {item.title}
-                        {/* <span className="badge badge-info badge-pill ml-1">3</span> */}
-                    </span>
-                </NavLink>
+                <>
+                    {item.subNav ? (
+                        <a
+                            className={
+                                item.subNav
+                                    ? 'js-navbar-vertical-aside-menu-link nav-link nav-link-toggle'
+                                    : 'js-navbar-vertical-aside-menu-link nav-link'
+                            }
+                            href="#menu"
+                            onClick={handleDropDown}
+                        >
+                            <IconContext.Provider value={{ className: 'nav-icon' }}>
+                                {item.icon}
+                            </IconContext.Provider>
+                            <span className="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">
+                                {item.title}
+                                {/* <span className="badge badge-info badge-pill ml-1">3</span> */}
+                            </span>
+                        </a>
+                    ) : (
+                        <NavLink
+                            className={
+                                item.subNav
+                                    ? 'js-navbar-vertical-aside-menu-link nav-link nav-link-toggle'
+                                    : 'js-navbar-vertical-aside-menu-link nav-link'
+                            }
+                            to={item.path}
+                        >
+                            <IconContext.Provider value={{ className: 'nav-icon' }}>
+                                {item.icon}
+                            </IconContext.Provider>
+                            <span className="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">
+                                {item.title}
+                                {/* <span className="badge badge-info badge-pill ml-1">3</span> */}
+                            </span>
+                        </NavLink>
+                    )}
+                </>
 
                 {item.subNav
                     ? item.subNav.map((subItem) => (
                           <ul
                               className={
-                                  openDropDown && dropDownId === item.id
+                                  openDropDown
                                       ? 'js-navbar-vertical-aside-submenu nav nav-sub showCustom'
                                       : 'js-navbar-vertical-aside-submenu nav nav-sub'
                               }
                               key={subItem.id}
                           >
-                              <li className="nav-item eshop-nav">
+                              <li
+                                  className="nav-item eshop-nav"
+                                  onClick={() => handleDropDownId(subItem.id)}
+                              >
                                   <Link
                                       className={
                                           pathname === subItem.path ? 'nav-link active' : 'nav-link'

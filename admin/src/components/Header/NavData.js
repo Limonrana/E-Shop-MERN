@@ -128,12 +128,12 @@ const NavData = [
             {
                 id: 1,
                 title: 'Users',
-                path: '/admin/users',
+                path: '/admin/settings/users',
             },
             {
                 id: 2,
-                title: 'Profile',
-                path: '/admin/profile',
+                title: 'Accounts',
+                path: '/admin/settings/accounts',
             },
         ],
     },

@@ -10,7 +10,7 @@ import DataTable from '../../components/DataTable/DataTable';
 import TableFooter from '../../components/DataTable/Footer/TableFooter';
 import TableHeader from '../../components/DataTable/Header/TableHeader';
 import Pagination from '../../components/DataTable/Pagination/Pagination';
-import OrderHeader from '../../components/Orders/OrderHeader';
+import OrderHeader from '../../components/Orders/OrdersPage/OrderHeader';
 
 const Orders = () => {
     // eslint-disable-next-line no-unused-vars
@@ -24,7 +24,7 @@ const Orders = () => {
             paymentStatus: true,
             fulfillment: true,
             paymentMethod: 'card',
-            total: '565',
+            total: '$565',
         },
         {
             id: 2,
@@ -32,10 +32,10 @@ const Orders = () => {
             path: '/admin/orders/id',
             date: 'Aug 18, 2020, 5:48 (ET)',
             customer: { id: 2, name: 'Mathew Gustaffson' },
-            paymentStatus: true,
+            paymentStatus: false,
             fulfillment: false,
             paymentMethod: 'paypal',
-            total: '343',
+            total: '$343',
         },
         {
             id: 3,
@@ -46,7 +46,7 @@ const Orders = () => {
             paymentStatus: true,
             fulfillment: true,
             paymentMethod: 'card',
-            total: '231',
+            total: '$231',
         },
         {
             id: 4,
@@ -54,10 +54,10 @@ const Orders = () => {
             path: '/admin/orders/id',
             date: 'Aug 17, 2020, 5:48 (ET)',
             customer: { id: 1, name: 'Jase Marley' },
-            paymentStatus: true,
-            fulfillment: true,
+            paymentStatus: false,
+            fulfillment: false,
             paymentMethod: 'card',
-            total: '565',
+            total: '$565',
         },
         {
             id: 5,
@@ -68,7 +68,7 @@ const Orders = () => {
             paymentStatus: true,
             fulfillment: false,
             paymentMethod: 'paypal',
-            total: '343',
+            total: '$343',
         },
         {
             id: 6,
@@ -79,7 +79,7 @@ const Orders = () => {
             paymentStatus: true,
             fulfillment: true,
             paymentMethod: 'card',
-            total: '231',
+            total: '$231',
         },
         {
             id: 7,
@@ -90,7 +90,7 @@ const Orders = () => {
             paymentStatus: true,
             fulfillment: true,
             paymentMethod: 'card',
-            total: '565',
+            total: '$565',
         },
         {
             id: 8,
@@ -101,7 +101,7 @@ const Orders = () => {
             paymentStatus: true,
             fulfillment: true,
             paymentMethod: 'paypal',
-            total: '343',
+            total: '$343',
         },
         {
             id: 9,
@@ -112,7 +112,7 @@ const Orders = () => {
             paymentStatus: true,
             fulfillment: false,
             paymentMethod: 'card',
-            total: '231',
+            total: '$231',
         },
         {
             id: 10,
@@ -123,7 +123,7 @@ const Orders = () => {
             paymentStatus: true,
             fulfillment: true,
             paymentMethod: 'card',
-            total: '565',
+            total: '$565',
         },
         {
             id: 11,
@@ -134,7 +134,7 @@ const Orders = () => {
             paymentStatus: true,
             fulfillment: false,
             paymentMethod: 'paypal',
-            total: '343',
+            total: '$343',
         },
         {
             id: 12,
@@ -145,7 +145,7 @@ const Orders = () => {
             paymentStatus: true,
             fulfillment: true,
             paymentMethod: 'card',
-            total: '231',
+            total: '$231',
         },
     ]);
     const [search, setSearch] = useState('');
@@ -159,9 +159,10 @@ const Orders = () => {
         { id: 2, name: 'Date', status: true },
         { id: 3, name: 'Customer', status: true },
         { id: 4, name: 'Payment Status', status: true },
-        { id: 5, name: 'Payment Method', status: true },
-        { id: 6, name: 'Total', status: true },
-        { id: 7, name: 'Actions', status: true },
+        { id: 5, name: 'Fulfillment Status', status: false },
+        { id: 6, name: 'Payment Method', status: true },
+        { id: 7, name: 'Total', status: true },
+        { id: 8, name: 'Actions', status: true },
     ]);
 
     const handleHeaderItem = (event) => {
@@ -259,7 +260,8 @@ const Orders = () => {
                                     {headerItems[5].status ? (
                                         <PaymentColumn type={item.paymentMethod} />
                                     ) : null}
-                                    {headerItems[6].status ? (
+                                    {headerItems[6].status ? <Column title={item.total} /> : null}
+                                    {headerItems[7].status ? (
                                         <ActionsColumn path={item.path} menu={actionMenu} />
                                     ) : null}
                                 </tr>

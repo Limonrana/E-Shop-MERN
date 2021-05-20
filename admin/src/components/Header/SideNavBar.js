@@ -36,20 +36,6 @@ const SideNavBar = () => {
                                         />
                                     ))}
 
-                                    <li className="nav-item active">
-                                        <a
-                                            className="js-nav-tooltip-link nav-link active"
-                                            href="layouts.html"
-                                            title="Layouts"
-                                            data-placement="left"
-                                        >
-                                            <i className="tio-dashboard-vs-outlined nav-icon" />
-                                            <span className="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">
-                                                Layouts
-                                            </span>
-                                        </a>
-                                    </li>
-
                                     <li className="nav-item">
                                         <div className="nav-divider" />
                                     </li>

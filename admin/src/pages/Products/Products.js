@@ -175,8 +175,6 @@ const Products = () => {
         },
     ]);
     const [showFilter, setShowFilter] = useState(false);
-    const [isOpenModal, setOpenModal] = useState(false);
-    const [isExportModal, setExportModal] = useState(false);
     const [selectData, setSelectData] = useState([]);
     const [search, setSearch] = useState('');
     const [filter, setFilter] = useState({
@@ -200,6 +198,18 @@ const Products = () => {
         { id: 7, name: 'Quantity' },
         { id: 8, name: 'Variants' },
     ]);
+    const [isOpenModal, setOpenModal] = useState({
+        import: false,
+        export: false,
+    });
+
+    const toggleModal = (event, name) => {
+        setOpenModal({
+            ...isOpenModal,
+            [name]: !isOpenModal[name],
+        });
+        event.preventDefault();
+    };
 
     const handleShowFilter = (event) => {
         setShowFilter(!showFilter);
@@ -228,41 +238,25 @@ const Products = () => {
     };
 
     const handleAllSelectData = () => {
-        if (selectData.length === 0) {
-            const newProduct = [];
-            // eslint-disable-next-line no-restricted-syntax
-            for (const item of product) {
-                newProduct.push(item.id);
+        if (selectData.length >= 0) {
+            if (selectData.length === product.length) {
+                setSelectData([]);
+            } else {
+                const newProduct = [];
+                // eslint-disable-next-line no-restricted-syntax
+                for (const item of product) {
+                    newProduct.push(item.id);
+                }
+                setSelectData(newProduct);
             }
-            setSelectData(newProduct);
         } else {
             setSelectData([]);
         }
     };
 
-    const toggleModal = (e) => {
-        setOpenModal(!isOpenModal);
-        e.preventDefault();
-    };
-
-    const toggleExportModal = (e) => {
-        setExportModal(!isExportModal);
-        e.preventDefault();
-    };
-
-    const modelContent = {
-        title: 'Import products by CSV',
-        body: 'to see an example of the format required.',
-        linkText: 'Download a sample CSV template',
-        link: '/admin/products',
-        footerText:
-            'Overwrite any current products that have the same handle. Existing values will be used for any missing columns.',
-        footerLink: '/admin/products',
-    };
-
     // eslint-disable-next-line no-undef
     const searchValue = useCallback(
-        (rows) => rows.filter((row) => row.name.toLowerCase().indexOf(search) > -1),
+        (rows) => rows.filter((row) => row.name.toLowerCase().indexOf(search.toLowerCase()) > -1),
         [search]
     );
     // Datatable Related Method & State
@@ -308,7 +302,7 @@ const Products = () => {
                                         <a
                                             className="text-light mr-3"
                                             href="#modal"
-                                            onClick={toggleExportModal}
+                                            onClick={(e) => toggleModal(e, 'export')}
                                         >
                                             <IconContext.Provider
                                                 value={{ className: 'mr-1 productIcons' }}
@@ -320,7 +314,7 @@ const Products = () => {
                                         <a
                                             className="text-light"
                                             href="#modal"
-                                            onClick={toggleModal}
+                                            onClick={(e) => toggleModal(e, 'import')}
                                         >
                                             <IconContext.Provider
                                                 value={{ className: 'mr-1 productIcons' }}
@@ -378,11 +372,10 @@ const Products = () => {
                 </div>
                 <UploadModal
                     toggleModal={toggleModal}
-                    isOpenModal={isOpenModal}
-                    content={modelContent}
+                    isOpenModal={isOpenModal.import}
                     btn="Upload and continue"
                 />
-                <ExportModal toggleExportModal={toggleExportModal} isExportModal={isExportModal} />
+                <ExportModal isOpenModal={isOpenModal.export} toggleModal={toggleModal} />
             </div>
         </>
     );

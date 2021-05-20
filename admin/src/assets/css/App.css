@@ -6726,6 +6726,16 @@ a.btn.btn-icon.btn-sm.btn-ghost-white.rounded-circle:hover {
   color: #677788 !important;
 }
 
+.text-hover-eshop:hover {
+  color: #003680 !important;
+}
+
+.avatar-xxl .avatar-uploader-icon {
+  width: 2.1875rem;
+  height: 2.1875rem;
+  padding: 5px !important;
+}
+
 @media screen and (min-device-width: 320px) and (max-device-width: 1199px) {
   .navbar-vertical-aside-show-xl .main .App .Login {
     margin-left: 0rem !important;

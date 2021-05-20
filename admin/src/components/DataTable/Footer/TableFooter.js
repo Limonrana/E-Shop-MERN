@@ -2,7 +2,11 @@
 const TableFooter = ({ getItemsPerPage, itemsPerPage, totalItems, children }) => {
     const option = [];
     for (let i = itemsPerPage; i <= totalItems; i += itemsPerPage) {
-        option.push(<option key={i}>{i}</option>);
+        option.push(
+            <option key={i} value={i}>
+                {i}
+            </option>
+        );
     }
 
     return (
@@ -14,8 +18,9 @@ const TableFooter = ({ getItemsPerPage, itemsPerPage, totalItems, children }) =>
 
                         <select
                             className="js-select2-custom"
+                            name="itemsPerPage"
                             value={itemsPerPage}
-                            onChange={() => getItemsPerPage(itemsPerPage)}
+                            onChange={getItemsPerPage}
                         >
                             {option}
                         </select>

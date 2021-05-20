@@ -7,6 +7,7 @@ import ProductMedia from '../../components/Products/ProductMedia';
 import ProductOrganization from '../../components/Products/ProductOrganization';
 import ProductPricing from '../../components/Products/ProductPricing';
 import ProductVariants from '../../components/Products/ProductVariants';
+import SaveAction from '../../components/Products/SaveAction';
 
 const ProductEdit = () => {
     const [productInput, setProductInput] = useState({
@@ -108,6 +109,7 @@ const ProductEdit = () => {
                 value={openImageModal ? productMedia.imageUrl : productMedia.videoUrl}
                 handle={handleProductMedia}
             />
+            <SaveAction />
         </>
     );
 };

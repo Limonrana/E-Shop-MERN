@@ -6,7 +6,7 @@ import './assets/css/theme.minc619.css';
 import AppFooter from './components/Footer/AppFooter';
 import AppHeader from './components/Header/AppHeader';
 import SideNavBar from './components/Header/SideNavBar';
-import Layout from './layout/Layout';
+import Routes from './routes/Routes';
 
 function App() {
     const [navMini, setNavMini] = useState(false);
@@ -24,7 +24,7 @@ function App() {
                 <AppHeader />
                 <SideNavBar />
                 <main id="content" className="main">
-                    <Layout handleNavMini={handleNavMini} navMini={navMini} />
+                    <Routes handleNavMini={handleNavMini} navMini={navMini} />
                     <AppFooter />
                 </main>
             </BrowserRouter>
