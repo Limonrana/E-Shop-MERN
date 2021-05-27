@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Col, Container, Row } from 'reactstrap';
 import CategoryMenu from '../components/CategoryMenu/CategoryMenu';
@@ -12,13 +12,14 @@ import { addToCart, openCartModal } from '../redux/actions/cartActions';
 import { detailsProduct } from '../redux/actions/productActions';
 
 const SingleProduct = ({ match }) => {
+    const [qty, setQty] = useState(1);
     const dispatch = useDispatch();
     const productID = match.params.id;
     const productDetails = useSelector((state) => state.productDetails);
     const { isLoading, error, product } = productDetails;
 
     const addCart = () => {
-        dispatch(addToCart(product._id, 1));
+        dispatch(addToCart(product._id, qty));
         dispatch(openCartModal());
     };
 
@@ -39,7 +40,12 @@ const SingleProduct = ({ match }) => {
                 </Col>
                 <Col xs="9" sm="12" md="9" className="col-reponsive">
                     <div className="category-full-content">
-                        <ProductDetails product={product} addCart={addCart} />
+                        <ProductDetails
+                            product={product}
+                            addCart={addCart}
+                            qty={qty}
+                            setQty={setQty}
+                        />
                         <Offers offerInfo={product.offerInfo} />
                         <Features features={product.features} />
                         <Description banner={product.banner} description={product.description} />

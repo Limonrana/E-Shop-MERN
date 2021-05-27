@@ -1,47 +1,55 @@
+import { Link } from 'react-router-dom';
+import { Col, Input, Row } from 'reactstrap';
 import { numberWithCommas } from '../../lib/utility';
 
-const CartItem = ({ item, cartIncrement, cartDecrement }) => (
+const CartItem = ({ item, cartAdd, cartRemove }) => (
     <div className="cart-order-item">
-        <div className="cart-order-item-top">
-            <figure>
-                <img src={item.image} alt={item.name} />
-            </figure>
-            <div className="cart-order-title">
-                <p>{item.name}</p>
-            </div>
-        </div>
-        <div className="cart-order-item-bottom">
-            <ul>
-                <li>
+        <div className="eshop-cart-order-item-bottom">
+            <Row xs="5">
+                <Col xs="2">
+                    <figure>
+                        <img src={item.image} alt={item.name} width="100px" height="90px" />
+                    </figure>
+                </Col>
+                <Col xs="5">
+                    <div className="eshop-cart-order-title">
+                        <Link to={`/products/${item.productId}`}>{item.name}</Link>
+                    </div>
+                </Col>
+                <Col xs="1" className="qu-op-2">
+                    <Input
+                        type="select"
+                        className="eshop-cart-qty"
+                        value={item.qty}
+                        onChange={(e) => cartAdd(item.productId, Number(e.target.value))}
+                    >
+                        {[...Array(item.stocks).keys()].map((x) => (
+                            <>
+                                {x > 4 ? null : (
+                                    <option key={x + 1} value={x + 1}>
+                                        {x + 1}
+                                    </option>
+                                )}
+                            </>
+                        ))}
+                    </Input>
+                </Col>
+                <Col xs="2">
                     ${' '}
                     {item.discountPrice !== null
                         ? numberWithCommas(item.discountPrice)
                         : numberWithCommas(item.price)}
-                </li>
-                <li className="qu-op-2">
+                </Col>
+                <Col xs="2">
                     <button
-                        className="qu-btn inc"
                         type="button"
-                        onClick={() => cartIncrement(item.id)}
+                        className="btn btn-outline-danger"
+                        onClick={() => cartRemove(item.productId)}
                     >
-                        +
+                        <i className="fas fa-trash" />
                     </button>
-                    <input type="text" className="qu-input" value={item.qty} />
-                    <button
-                        className="qu-btn dec"
-                        type="button"
-                        onClick={() => cartDecrement(item.id)}
-                    >
-                        -
-                    </button>
-                </li>
-                <li>
-                    ${' '}
-                    {item.discountPrice !== null
-                        ? numberWithCommas(item.discountPrice * item.qty)
-                        : numberWithCommas(item.price * item.qty)}
-                </li>
-            </ul>
+                </Col>
+            </Row>
         </div>
         {item.discountPrice !== null ? (
             <div className="card-order-save">

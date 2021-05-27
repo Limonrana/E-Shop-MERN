@@ -1,5 +1,3 @@
-/* eslint-disable import/prefer-default-export */
-
 export const numberWithCommas = (num) => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
 export const cartTotal = (cartItems) => {

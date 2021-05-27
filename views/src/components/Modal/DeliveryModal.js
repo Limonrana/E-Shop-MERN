@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import agent764 from '../../assets/images/agent-764.webp';
 import agent765 from '../../assets/images/agent-765.webp';
 import agent from '../../assets/images/agent.jpg';
@@ -10,7 +11,8 @@ import man3 from '../../assets/images/man3.jpg';
 import menn from '../../assets/images/menn.jpg';
 import store from '../../assets/images/store.png';
 
-const DeliveryModal = ({ openDeliveryModal, isOpenDelivery, openAuthModal }) => {
+const DeliveryModal = ({ openDeliveryModal, isOpenDelivery }) => {
+    const history = useHistory();
     const [isAgentShow, setAgentShow] = useState(1);
 
     const getAgent = (idx) => {
@@ -19,7 +21,7 @@ const DeliveryModal = ({ openDeliveryModal, isOpenDelivery, openAuthModal }) => 
 
     const openSignupCloseDelivery = () => {
         openDeliveryModal();
-        openAuthModal();
+        history.push('/signin');
     };
 
     return (

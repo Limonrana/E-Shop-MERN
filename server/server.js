@@ -1,12 +1,13 @@
 const dotenv = require('dotenv');
 
 dotenv.config();
-require('./helpers/db')();
+require('./helpers/config/db')();
 
 /*
  * Server Start from here
  */
 const app = require('./app');
+
 const port = process.env.PORT || 3030;
 
 app.listen(port, () => {

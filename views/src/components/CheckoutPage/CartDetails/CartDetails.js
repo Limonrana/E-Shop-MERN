@@ -2,9 +2,9 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import iconEmi from '../../../assets/images/icon-emi.svg';
 import { numberWithCommas } from '../../../lib/utility';
-import CartItem from '../../Cart/CartItem';
+import CartItemModal from '../../Cart/CartItemModal';
 
-const CartDetails = () => {
+const CartDetails = ({ shippingData, isCoupon = true }) => {
     const cart = useSelector((state) => state.cart);
     const { cartItems } = cart;
 
@@ -13,12 +13,12 @@ const CartDetails = () => {
             return cartItems.reduce(
                 (price, item) =>
                     item.discountPrice !== null
-                        ? price + item.discountPrice * item.qty
-                        : price + item.price * item.qty,
+                        ? price + Number(item.discountPrice) * Number(item.qty)
+                        : price + Number(item.price) * Number(item.qty),
                 0
             );
         }
-        return null;
+        return 0;
     };
 
     return (
@@ -31,27 +31,38 @@ const CartDetails = () => {
             </div>
             <div className="cart-order-inner">
                 {cartItems.map((item) => (
-                    <CartItem item={item} key={item.id} />
+                    <CartItemModal item={item} key={item._id} />
                 ))}
             </div>
             <div className="cart-price-option">
                 <div className="cart-price-sub">
                     <h4>Subtotal</h4>
-                    <p>$ {numberWithCommas(cartTotal())}</p>
+                    <p>$ {numberWithCommas(cart.itemsPrice || cartTotal().toFixed(2))}</p>
                 </div>
                 <div className="cart-price-sub">
-                    <h4>Delivery charge</h4>
-                    <p className="red">Free delivery</p>
+                    <h4>Shipping charge</h4>
+                    <p className="red">$ {cart.shippingPrice || shippingData.price.toFixed(2)}</p>
+                </div>
+                <div className="cart-price-sub">
+                    <h4>Tax charge (0.15%)</h4>
+                    <p className="red">$ {cart.taxPrice || '0.00'}</p>
                 </div>
                 <div className="cart-price-sub big-sub">
                     <h4>Order Total</h4>
-                    <p>$ {numberWithCommas(cartTotal())}</p>
+                    <p>
+                        ${' '}
+                        {numberWithCommas(
+                            cart.totalPrice || (cartTotal() + shippingData.price).toFixed(2)
+                        )}
+                    </p>
                 </div>
             </div>
-            <div className="cart-coupon">
-                <input type="text" placeholder="Have coupon code? Enter here" />
-                <button type="button">Apply</button>
-            </div>
+            {isCoupon ? (
+                <div className="cart-coupon">
+                    <input type="text" placeholder="Have coupon code? Enter here" />
+                    <button type="button">Apply</button>
+                </div>
+            ) : null}
         </div>
     );
 };

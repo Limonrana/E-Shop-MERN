@@ -1,14 +1,15 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Input } from 'reactstrap';
 import bkash10 from '../../../../assets/images/bkash10.png';
 import checked from '../../../../assets/images/checked.svg';
 import iconLock from '../../../../assets/images/icon-lock.svg';
 import mastercard from '../../../../assets/images/mastercard.svg';
 import { numberWithCommas } from '../../../../lib/utility';
 
-const Details = ({ info, addCart }) => {
-    const [size, setSize] = useState('1');
+const Details = ({ info, addCart, qty, setQty }) => {
+    const [size, setSize] = useState(info.size[0]._id);
     const activeSize = (id) => {
         setSize(id);
     };
@@ -21,7 +22,7 @@ const Details = ({ info, addCart }) => {
         <div className="product-details-right">
             <div className="product-id">
                 <p>
-                    Id#<span>100{info._id}</span>
+                    Category: <span>{info.category}</span>
                 </p>
             </div>
             <div className="product-facility">
@@ -51,6 +52,7 @@ const Details = ({ info, addCart }) => {
                     </li>
                     <li className={discount ? null : 'hideCustom'}>
                         <del>
+                            $
                             {info.discountPrice ||
                             info.discountPrice !== '' ||
                             info.discountPrice !== null
@@ -59,7 +61,7 @@ const Details = ({ info, addCart }) => {
                         </del>
                     </li>
                     <li className={discount ? 'save' : 'save hideCustom'}>
-                        Save{' '}
+                        Save $
                         {info.discountPrice ||
                         info.discountPrice !== '' ||
                         info.discountPrice !== null
@@ -73,8 +75,8 @@ const Details = ({ info, addCart }) => {
                 <ul>
                     {info.size.map((item) => (
                         <li
-                            className={size === item._id ? 'active' : ''}
                             key={item._id}
+                            className={size === item._id ? 'active' : ''}
                             onClick={() => activeSize(item._id)}
                         >
                             {item.value}
@@ -92,29 +94,64 @@ const Details = ({ info, addCart }) => {
                 </div>
             </div>
             <div className="product-btn">
-                <ul>
-                    <li>
-                        <Link className="btn buy-btn" to="/payment">
-                            Buy now
-                        </Link>
-                    </li>
-                    <li>
-                        <button className="cart-btn" type="button" onClick={addCart}>
-                            Add to cart
-                        </button>
-                    </li>
-                </ul>
+                {info.stocks > 0 ? (
+                    <ul>
+                        <li>
+                            <Input
+                                type="select"
+                                className="eshop-qty"
+                                value={qty}
+                                onChange={(e) => setQty(e.target.value)}
+                            >
+                                {[...Array(info.stocks).keys()].map((x) => (
+                                    <>
+                                        {x > 4 ? null : (
+                                            <option key={x + 1} value={x + 1}>
+                                                Only {x + 1}
+                                            </option>
+                                        )}
+                                    </>
+                                ))}
+                            </Input>
+                        </li>
+                        <li>
+                            <button className="cart-btn" type="button" onClick={addCart}>
+                                Add to cart
+                            </button>
+                        </li>
+                    </ul>
+                ) : (
+                    <button className="btn btn-warning btn-block" type="button" disabled>
+                        OUT OF STOCK
+                    </button>
+                )}
             </div>
             <div className="price-flag">
                 <ul>
-                    {info.deliveryInfo.map((item) => (
-                        <li key={item._id}>
+                    {info.deliveryInfo.appiAgent ? (
+                        <li>
                             <img className="check" src={checked} alt="checked" />
                             <p>
-                                <Link to={item.link}>{item.text}</Link>
+                                <Link to="/">Deliverable to appiAgent stores</Link>
                             </p>
                         </li>
-                    ))}
+                    ) : null}
+                    {info.deliveryInfo.appiHubs ? (
+                        <li>
+                            <img className="check" src={checked} alt="checked" />
+                            <p>
+                                <Link to="/">Deliverable to appiHubs</Link>
+                            </p>
+                        </li>
+                    ) : null}
+                    {info.deliveryInfo.home ? (
+                        <li>
+                            <img className="check" src={checked} alt="checked" />
+                            <p>
+                                <Link to="/">Deliverable to your Home</Link>
+                            </p>
+                        </li>
+                    ) : null}
                 </ul>
             </div>
         </div>

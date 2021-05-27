@@ -4,7 +4,13 @@ import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import Logo from '../../assets/images/logo-header.png';
 
-const NavBar = ({ openCartModel, openAuthModal, openDeliveryModal, countCartItem }) => {
+const NavBar = ({
+    openCartModel,
+    openDeliveryModal,
+    countCartItem,
+    eshopCustomer,
+    signOutHandler,
+}) => {
     const [searchValue, setSearchValue] = useState('');
     const history = useHistory();
 
@@ -68,13 +74,30 @@ const NavBar = ({ openCartModel, openAuthModal, openDeliveryModal, countCartItem
                                 <Link to="/category/all">Shop</Link>
                             </li>
                             <li className="nav-navigation-list click-auth navi-move">
-                                <button
-                                    onClick={() => openAuthModal()}
-                                    type="button"
-                                    className="bg-transfarent"
-                                >
-                                    Login
-                                </button>
+                                {eshopCustomer ? (
+                                    <div className="dropdown-header-menu">
+                                        <button type="button" className="bg-transfarent">
+                                            {eshopCustomer.name}{' '}
+                                            <span>
+                                                {'  '}
+                                                <i className="fas fa-sort-down" />
+                                            </span>
+                                        </button>
+                                        <div className="dropdown-header-content">
+                                            <Link
+                                                to="#signout"
+                                                className="header-user-menu"
+                                                onClick={signOutHandler}
+                                            >
+                                                Sign Out
+                                            </Link>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <Link to="/signin" className="bg-transfarent">
+                                        Login
+                                    </Link>
+                                )}
                             </li>
                             <li className="nav-navigation-list cart-list">
                                 <button

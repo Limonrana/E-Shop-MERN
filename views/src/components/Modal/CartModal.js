@@ -1,19 +1,23 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import backIcon from '../../assets/images/back-right.svg';
 import shoppingCart from '../../assets/images/shopping-cart.png';
 import { cartTotal, numberWithCommas } from '../../lib/utility';
 import { openCartModal } from '../../redux/actions/cartActions';
-import CartItem from '../Cart/CartItem';
+import CartItemModal from '../Cart/CartItemModal';
 
 const CartPopup = ({ isOpenCart, openCartModel, cartItems, cartIncrement, cartDecrement }) => {
-    const dispatch = useDispatch();
     const history = useHistory();
-    const paymentPage = () => {
+    const dispatch = useDispatch();
+    const checkoutHandler = () => {
         dispatch(openCartModal());
-        history.push('/payment');
+        history.push('/signin?redirect=shipping');
+    };
+
+    const cartPage = () => {
+        dispatch(openCartModal());
     };
     return (
         <div
@@ -38,11 +42,11 @@ const CartPopup = ({ isOpenCart, openCartModel, cartItems, cartIncrement, cartDe
                     <>
                         <div className="cart-order-inner">
                             {cartItems.map((item) => (
-                                <CartItem
+                                <CartItemModal
                                     item={item}
                                     cartDecrement={cartDecrement}
                                     cartIncrement={cartIncrement}
-                                    key={item.id}
+                                    key={item.productId}
                                 />
                             ))}
                         </div>
@@ -55,9 +59,13 @@ const CartPopup = ({ isOpenCart, openCartModel, cartItems, cartIncrement, cartDe
                         <div className="cart-pop-coupon">
                             <p>Coupon can be applied during checkout.</p>
                             <div className="cart-coupon-btn">
-                                <a href="#coupon">Apply coupon</a>
+                                <div className="cart-with-btn">
+                                    <Link to="/cart" className="cart-button" onClick={cartPage}>
+                                        Cart
+                                    </Link>
+                                </div>
                                 <div className="pay-with-btn">
-                                    <button type="button" onClick={paymentPage}>
+                                    <button type="button" onClick={checkoutHandler}>
                                         Place order
                                     </button>
                                 </div>

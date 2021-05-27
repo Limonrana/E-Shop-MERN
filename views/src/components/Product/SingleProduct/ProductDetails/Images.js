@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 
 const Images = ({ images }) => {
-    const [currentSilder, setSlider] = useState(1);
+    const [currentSilder, setSlider] = useState(images[0]._id);
     const showImage = (id) => {
         setSlider(id);
     };

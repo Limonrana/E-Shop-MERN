@@ -10,9 +10,10 @@ class Authentication extends Component {
         isShowLoginBTN: true,
         isShowPhone: false,
         isShowNameOtp: false,
-        phone: '',
-        name: '',
-        otp: '',
+        phone: null,
+        name: null,
+        email: null,
+        otp: Math.floor(Math.random() * 1000000000),
     };
 
     handleInput = (event) => {
@@ -22,34 +23,43 @@ class Authentication extends Component {
     };
 
     handleSubmit = (event) => {
-        const { openAuthModal, isShowNameOtp } = this.props;
-        const { name, otp } = this.state;
-        if (name !== '' && otp !== '') {
+        const { openAuthModal } = this.props;
+        const { name, phone, otp, isShowNameOtp } = this.state;
+        if (name !== '' && name !== null && otp !== '' && otp !== null) {
             this.setState({
-                phone: '',
-                name: '',
-                otp: '',
+                phone: null,
+                name: null,
+                email: null,
+                otp: Math.floor(Math.random() * 1000000000),
+                isShowLoginBTN: true,
+                isShowPhone: false,
+                isShowNameOtp: false,
             });
             openAuthModal();
-        } else {
+        } else if (phone !== null && phone !== '') {
             this.setState({
                 isShowNameOtp: !isShowNameOtp,
+            });
+        } else {
+            this.setState({
+                phone: '',
             });
         }
         event.preventDefault();
     };
 
-    showForm = () => {
+    showForm = (e) => {
         const { isShowLoginBTN, isShowPhone } = this.state;
         this.setState({
             isShowLoginBTN: !isShowLoginBTN,
             isShowPhone: !isShowPhone,
         });
+        e.preventDefault();
     };
 
     render() {
         const { isOpenAuth, openAuthModal } = this.props;
-        const { isShowLoginBTN, isShowPhone, isShowNameOtp, name, phone, otp } = this.state;
+        const { isShowLoginBTN, isShowPhone, isShowNameOtp, name, phone, otp, email } = this.state;
         return (
             <div
                 className={
@@ -88,7 +98,7 @@ class Authentication extends Component {
                                 Continue with facebook
                             </button>
                             <div className="connect-login">
-                                <a href="javascript:void(0)" onClick={() => this.showForm()}>
+                                <a href="#login" onClick={(e) => this.showForm(e)}>
                                     Sign in or sign up with phone number
                                 </a>
                             </div>
@@ -112,7 +122,7 @@ class Authentication extends Component {
                                         value={phone}
                                         onChange={this.handleInput}
                                     />
-                                    {phone === '' ? (
+                                    {phone === '' && phone !== null ? (
                                         <div className="required-box req-b" id="req-3">
                                             <p>Mobile number is required</p>
                                         </div>
@@ -137,9 +147,27 @@ class Authentication extends Component {
                                             onChange={this.handleInput}
                                         />
 
-                                        {name === '' ? (
+                                        {name === '' && name !== null ? (
                                             <div className="required-box req-b" id="req-4">
                                                 <p>Name is required</p>
+                                            </div>
+                                        ) : null}
+                                    </div>
+                                    <div className="modal-input-box">
+                                        <Label htmlFor="name">Email Address</Label>
+                                        <Input
+                                            type="email"
+                                            placeholder="Enter your email"
+                                            className="new-auth-input-bx new-auth-input-bx-1"
+                                            id="email"
+                                            name="email"
+                                            value={email}
+                                            onChange={this.handleInput}
+                                        />
+
+                                        {email === '' && email !== null ? (
+                                            <div className="required-box req-b" id="req-4">
+                                                <p>Email is required</p>
                                             </div>
                                         ) : null}
                                     </div>
@@ -154,7 +182,7 @@ class Authentication extends Component {
                                             value={otp}
                                             onChange={this.handleInput}
                                         />
-                                        {otp === '' ? (
+                                        {otp === '' && otp !== null ? (
                                             <div className="required-box req-b" id="req-5">
                                                 <p>OTP is required</p>
                                             </div>
