@@ -1,3 +1,4 @@
+import queryString from 'query-string';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Col, Container, Row } from 'reactstrap';
@@ -12,12 +13,21 @@ import CategorySider from '../components/Home/CategorySlider/CategorySlider';
 import MessageBox from '../components/Others/MessageBox';
 import Preloader from '../components/Preloader/Preloader';
 import ProductGrid from '../components/Product/ProductGrid';
+import { errorMessage } from '../lib/Toastify';
 import { listProducts } from '../redux/actions/productActions';
 
-const Category = () => {
+const Category = ({ location }) => {
     const dispatch = useDispatch();
+    const qurey = queryString.parse(location.search);
     const productList = useSelector((state) => state.productList);
     const { isLoading, error, products } = productList;
+    if (!isLoading) {
+        if (products.length !== 0) {
+            if (qurey.type === 'error') {
+                errorMessage(qurey.message);
+            }
+        }
+    }
 
     useEffect(() => {
         dispatch(listProducts());

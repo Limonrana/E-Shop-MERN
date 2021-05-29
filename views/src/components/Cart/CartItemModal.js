@@ -26,7 +26,13 @@ const CartItemModal = ({ item, cartIncrement, cartDecrement }) => (
                     >
                         +
                     </button>
-                    <input type="text" className="qu-input" defaultValue={item.qty} readOnly />
+                    <input
+                        type="text"
+                        className="qu-input"
+                        value={item.qty}
+                        onChange={() => 'Updated'}
+                        readOnly
+                    />
                     <button
                         className="qu-btn dec"
                         type="button"

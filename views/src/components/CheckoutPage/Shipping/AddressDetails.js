@@ -1,4 +1,8 @@
-const AddressDetails = ({ changeAddress, info: { name, address, email, city, zip, country } }) => (
+const AddressDetails = ({
+    changeAddress,
+    info: { name, address, email, city, zip, country },
+    isBtn = true,
+}) => (
     <div className="field-item-inner">
         <div className="fieid-item-add">
             <h5>Address:</h5>
@@ -11,11 +15,13 @@ const AddressDetails = ({ changeAddress, info: { name, address, email, city, zip
                 </p>
             </div>
         </div>
-        <div className="field-change-btn">
-            <button type="button" onClick={changeAddress}>
-                Change
-            </button>
-        </div>
+        {isBtn ? (
+            <div className="field-change-btn">
+                <button type="button" onClick={changeAddress}>
+                    Change
+                </button>
+            </div>
+        ) : null}
     </div>
 );
 

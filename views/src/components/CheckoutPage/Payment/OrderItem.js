@@ -19,6 +19,7 @@ const OrderItem = ({ item }) => (
                         : numberWithCommas(item.price)}
                 </li>
                 <li className="qu-op-2">
+                    <span>QTY:</span>
                     <input type="text" className="qu-input" defaultValue={item.qty} readOnly />
                 </li>
                 <li>

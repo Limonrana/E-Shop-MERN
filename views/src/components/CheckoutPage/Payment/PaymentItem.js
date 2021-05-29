@@ -20,7 +20,7 @@ const PaymentItem = ({ selectMethod, value, method, image, title, body }) => (
                 </div>
                 <div className="service-fee">
                     <p>
-                        <img src={image} alt="bkash" width="80px" />
+                        <img src={image} alt="bkash" width="100px" />
                     </p>
                 </div>
             </div>

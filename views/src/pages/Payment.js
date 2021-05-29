@@ -3,8 +3,9 @@ import Axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Col, Container, Row } from 'reactstrap';
-import card from '../assets/images/card-icon.png';
-import rocket from '../assets/images/rocket.svg';
+import cardPay from '../assets/images/credit-debit-card.png';
+import sslcom from '../assets/images/payment-sslcommerz.png';
+import paypalLogo from '../assets/images/paypal_logo.png';
 import ActiveStep from '../components/CheckoutPage/OrderDetails/ActiveStep';
 import OrderDetails from '../components/CheckoutPage/Payment/OrderDetails';
 import PaymentItem from '../components/CheckoutPage/Payment/PaymentItem';
@@ -22,16 +23,22 @@ const Payment = ({ match, history }) => {
 
     const orderDetails = useSelector((state) => state.orderDetails);
     const { isLoading, error, order } = orderDetails;
-    if (!isLoading && !order) {
-        history.push('/shipping');
-    } else if (!isLoading && order.isPaid) {
-        history.push(`/order/success?id=${order._id}&invoice=ESHOP-${order.invoiceNumber}`);
+    if (!isLoading) {
+        if (!order) {
+            history.push('/shipping');
+        } else if (eshopCustomer) {
+            if (eshopCustomer.id !== order.customer) {
+                history.push(`/shop?message=Order not found!&type=error`);
+            } else if (order.isPaid) {
+                history.push(`/order/${order._id}?invoice=ESHOP-${order.invoiceNumber}`);
+            }
+        }
     }
 
     const orderPay = useSelector((state) => state.orderPay);
     const { error: errorPay, success: successPay } = orderPay;
     const [paymentMethod, setPaymentMethod] = useState('');
-    const [sdkReady, setSdkReady] = useState(true);
+    const [sdkReady, setSdkReady] = useState(false);
 
     const selectMethod = (value) => {
         setPaymentMethod(value);
@@ -48,7 +55,7 @@ const Payment = ({ match, history }) => {
             });
             const script = document.createElement('script');
             script.type = 'text/javascript';
-            script.src = `https://www.paypal.com/sdk/js/client-id=${data}`;
+            script.src = `https://www.paypal.com/sdk/js?client-id=${data}`;
             script.async = true;
             script.onload = () => {
                 setSdkReady(true);
@@ -67,7 +74,7 @@ const Payment = ({ match, history }) => {
         if (successPay) {
             history.push(`/order/success?id=${order._id}&invoice=ESHOP-${order.invoiceNumber}`);
         }
-    }, [dispatch, eshopCustomer.token, history, order, orderId, successPay]);
+    }, [dispatch, eshopCustomer, history, order, orderId, successPay]);
 
     let content = null;
     if (isLoading) {
@@ -99,23 +106,15 @@ const Payment = ({ match, history }) => {
                                         selectMethod={selectMethod}
                                         value="Paypal"
                                         method={paymentMethod}
-                                        image={rocket}
+                                        image={paypalLogo}
                                         title="Pay With Paypal"
                                         body="Pay online with your paypal account, and complete purchase immediately."
                                     />
                                     <PaymentItem
                                         selectMethod={selectMethod}
-                                        value="Bkash"
-                                        method={paymentMethod}
-                                        image={rocket}
-                                        title="Pay With Bkash"
-                                        body="Pay online with your bKash personal account, and complete purchase immediately."
-                                    />
-                                    <PaymentItem
-                                        selectMethod={selectMethod}
                                         value="Card"
                                         method={paymentMethod}
-                                        image={card}
+                                        image={cardPay}
                                         title="Credit Or Debit Card"
                                         body="Pay online with your credit Or debit card, and complete purchase immediately."
                                     />
@@ -123,9 +122,9 @@ const Payment = ({ match, history }) => {
                                         selectMethod={selectMethod}
                                         value="SSL Commercez"
                                         method={paymentMethod}
-                                        image={card}
-                                        title="SSL Commercez Payment"
-                                        body="Pay online with your credit Or debit card, and complete purchase immediately."
+                                        image={sslcom}
+                                        title="SSL Commerz Payment"
+                                        body="Pay online with your local credit Or debit card, and complete purchase immediately from BD."
                                     />
 
                                     {/* <div className="field-payment-details mt-4">

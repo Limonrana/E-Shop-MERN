@@ -5134,13 +5134,14 @@ ul.category-section-dropdown.show {
   position: absolute;
   display: none;
   right: 0;
-  min-width: 9rem;
+  min-width: 8rem;
   padding: 1rem;
   z-index: 1;
-  background-color: #ffffff;
+  background-color: #003680;
   margin: 0;
   text-align: right;
   border-radius: 0.5rem;
+  padding-right: 20px;
 }
 .dropdown-header-menu:hover .dropdown-header-content {
   display: block !important;
@@ -5148,10 +5149,9 @@ ul.category-section-dropdown.show {
 
 a.header-user-menu {
   color: #ffffff !important;
-  min-width: 8rem !important;
-  background: #003680;
-  padding: 0.4rem 1.8rem;
-  border-radius: 10px;
+}
+a.header-user-menu:hover {
+  color: #fcbf14 !important;
 }
 
 select.eshop-qty.form-control {
@@ -5242,6 +5242,19 @@ select.eshop-qty.form-control {
   border: 1px solid;
   border-radius: 10px;
   z-index: 1;
+}
+
+th {
+  text-transform: uppercase;
+}
+
+.order-history {
+  padding: 20px 15px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 100px;
 }
 
 /* My Media Query CSS */

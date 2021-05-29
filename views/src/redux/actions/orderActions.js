@@ -8,8 +8,6 @@ export const createOrder = (order) => async (dispatch, getState) => {
         const {
             customerSignin: { eshopCustomer },
         } = getState();
-        console.log(eshopCustomer);
-        console.log(order);
         const { data } = await Axios.post('/api/orders', order, {
             headers: {
                 Authorization: `Bearer ${eshopCustomer.token}`,
@@ -24,6 +22,32 @@ export const createOrder = (order) => async (dispatch, getState) => {
     } catch (error) {
         dispatch({
             type: actionTypes.ORDER_CREATE_FAIL,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message,
+        });
+    }
+};
+
+export const getOrderList = (querySting) => async (dispatch, getState) => {
+    dispatch({ type: actionTypes.ORDER_LIST_REQUEST });
+    try {
+        const {
+            customerSignin: { eshopCustomer },
+        } = getState();
+        const { data } = await Axios.get(`/api/customer/orders/all?type=${querySting}`, {
+            headers: {
+                Authorization: `Bearer ${eshopCustomer.token}`,
+            },
+        });
+        dispatch({
+            type: actionTypes.ORDER_LIST_SUCCESS,
+            payload: data,
+        });
+    } catch (error) {
+        dispatch({
+            type: actionTypes.ORDER_LIST_FAIL,
             payload:
                 error.response && error.response.data.message
                     ? error.response.data.message

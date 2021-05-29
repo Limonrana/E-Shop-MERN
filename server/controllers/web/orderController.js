@@ -67,7 +67,6 @@ const pay = async (req, res) => {
                 message: 'Order was updated successfully!',
                 order: updatedOrder,
             });
-            console.log(req.body);
         }
     } catch (error) {
         res.status(500).json({

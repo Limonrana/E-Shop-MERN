@@ -2,7 +2,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Col, Container, Row } from 'reactstrap';
-import iconEmi from '../assets/images/icon-emi.svg';
 import shoppingCart from '../assets/images/shopping-cart.png';
 import CartItem from '../components/Cart/CartItem';
 import { cartTotal, numberWithCommas } from '../lib/utility';
@@ -36,9 +35,6 @@ const Cart = ({ history }) => {
                         <div className="cart-full-box box-shadow mb-3">
                             <div className="order-title">
                                 <h2>Shopping cart</h2>
-                                <div className="delivery-title-icon new-delivery-icon">
-                                    <img src={iconEmi} alt="icon-emi" />
-                                </div>
                             </div>
                             <Row md="2">
                                 <Col md={8} className="pb-4">

@@ -84,13 +84,31 @@ const NavBar = ({
                                             </span>
                                         </button>
                                         <div className="dropdown-header-content">
-                                            <Link
-                                                to="#signout"
-                                                className="header-user-menu"
-                                                onClick={signOutHandler}
-                                            >
-                                                Sign Out
-                                            </Link>
+                                            <div>
+                                                <Link
+                                                    to="/customer/orders?type=paid"
+                                                    className="header-user-menu"
+                                                >
+                                                    Paid Orders
+                                                </Link>
+                                            </div>
+                                            <div>
+                                                <Link
+                                                    to="/customer/orders?type=unpaid"
+                                                    className="header-user-menu"
+                                                >
+                                                    Unpaid Orders
+                                                </Link>
+                                            </div>
+                                            <div>
+                                                <Link
+                                                    to="#signout"
+                                                    className="header-user-menu"
+                                                    onClick={signOutHandler}
+                                                >
+                                                    Sign Out
+                                                </Link>
+                                            </div>
                                         </div>
                                     </div>
                                 ) : (
