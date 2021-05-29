@@ -5139,9 +5139,8 @@ ul.category-section-dropdown.show {
   z-index: 1;
   background-color: #003680;
   margin: 0;
-  text-align: right;
   border-radius: 0.5rem;
-  padding-right: 20px;
+  padding-left: 20px;
 }
 .dropdown-header-menu:hover .dropdown-header-content {
   display: block !important;
@@ -5250,6 +5249,21 @@ th {
 
 .order-history {
   padding: 20px 15px;
+}
+
+.nav-tabs .nav-link {
+  cursor: pointer;
+}
+
+button.link {
+  border: none;
+  text-decoration: underline !important;
+  background: transparent;
+  color: #003680 !important;
+}
+
+button.link:hover {
+  color: #007bff;
 }
 
 .empty-state {

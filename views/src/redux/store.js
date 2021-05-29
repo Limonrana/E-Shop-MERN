@@ -1,7 +1,7 @@
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import { cartReducer } from './reducers/cartReducers';
-import { customerSignInReducer, customerSignUpReducer } from './reducers/customerReducers';
+import * as CustomerReducers from './reducers/customerReducers';
 import * as OrderReducers from './reducers/orderReducers';
 import { productDetailReducer, productListReducer } from './reducers/productReducers';
 
@@ -36,12 +36,14 @@ const reducer = combineReducers({
     productList: productListReducer,
     productDetails: productDetailReducer,
     cart: cartReducer,
-    customerSignin: customerSignInReducer,
-    customerSignup: customerSignUpReducer,
+    customerSignin: CustomerReducers.customerSignInReducer,
+    customerSignup: CustomerReducers.customerSignUpReducer,
+    customerDetails: CustomerReducers.customerDetailsReducer,
+    customerUpdate: CustomerReducers.customerProfileUpdateReducer,
     orderCreate: OrderReducers.orderCreateReducer,
-    orderDetails: OrderReducers.orderDetailsReducer,
     orderPay: OrderReducers.orderPayReducer,
     orderList: OrderReducers.orderListReducer,
+    orderDetails: OrderReducers.orderDetailsReducer,
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

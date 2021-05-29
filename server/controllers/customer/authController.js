@@ -71,11 +71,11 @@ const signup = async (req, res) => {
 
         return res.status(200).json({
             token,
-            id: customer._id,
-            name: customer.name,
-            email: customer.email,
-            phone: customer.phone,
-            status: customer.status,
+            id: result._id,
+            name: result.name,
+            email: result.email,
+            phone: result.phone,
+            status: result.status,
         });
     } catch (err) {
         return res.status(500).json({
@@ -111,7 +111,38 @@ const show = async (req, res) => {
  */
 
 const updated = async (req, res) => {
-    res.status(200).json({ message: 'Customer updated successfully!' });
+    try {
+        const customer = await Customer.findById(req.params.id);
+        if (req.body.password) {
+            const checkPassword = await bcrypt.compare(req.body.oldPassword, customer.password);
+            if (!checkPassword) {
+                return res.status(500).json({
+                    message: "Old Password didn't match!",
+                });
+            }
+        }
+        if (customer) {
+            customer.email = req.body.email || customer.email;
+            customer.name = req.body.name || customer.name;
+            customer.phone = req.body.phone || customer.phone;
+            if (req.body.password) {
+                customer.password = await bcrypt.hash(req.body.password, 10);
+            }
+            const token = customer.generateToken();
+            const updateCustomer = await customer.save();
+            return res.status(200).json({ 
+                token,
+                id: updateCustomer._id,
+                name: updateCustomer.name,
+                email: updateCustomer.email,
+                phone: updateCustomer.phone,
+             });
+        }
+    } catch (err) {
+        return res.status(500).json({
+            error: 'There was a server side error!',
+        });
+    }
 };
 
 

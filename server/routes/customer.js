@@ -6,11 +6,11 @@ const auth = require('../middlewares/auth');
 const router = express.Router();
 router
     .get('/seeds', customerAuth.seeds)
-    .get('/:id', customerAuth.show)
+    .get('/:id', auth, customerAuth.show)
     .post('/signup', customerAuth.signup)
     .post('/signin', customerAuth.signin)
-    .put('/:id', customerAuth.updated)
-    .delete('/:id', customerAuth.destroy);
+    .put('/:id', auth, customerAuth.updated)
+    .delete('/:id', auth, customerAuth.destroy);
 
 router
     .get('/orders/all', auth, customer.orders);

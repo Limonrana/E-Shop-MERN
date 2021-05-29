@@ -89,15 +89,15 @@ const NavBar = ({
                                                     to="/customer/orders?type=paid"
                                                     className="header-user-menu"
                                                 >
-                                                    Paid Orders
+                                                    Orders
                                                 </Link>
                                             </div>
                                             <div>
                                                 <Link
-                                                    to="/customer/orders?type=unpaid"
+                                                    to="/customer/profile"
                                                     className="header-user-menu"
                                                 >
-                                                    Unpaid Orders
+                                                    Profile
                                                 </Link>
                                             </div>
                                             <div>
@@ -106,7 +106,7 @@ const NavBar = ({
                                                     className="header-user-menu"
                                                     onClick={signOutHandler}
                                                 >
-                                                    Sign Out
+                                                    Sign-out
                                                 </Link>
                                             </div>
                                         </div>

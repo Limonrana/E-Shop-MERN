@@ -1,5 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
+import PrivateRoute from '../components/Others/PrivateRoute';
+import CustomerProfile from '../customers/CustomerProfile';
 import OrderList from '../customers/OrderList';
 import CartPage from '../pages/Cart';
 import Category from '../pages/Category';
@@ -26,7 +28,8 @@ const Layout = () => (
         <Route path="/payment/:id" component={PaymentPage} />
         <Route path="/order/:id" component={OrderSuccess} />
         {/* Customer Routes */}
-        <Route path="/customer/orders" component={OrderList} />
+        <PrivateRoute path="/customer/orders" component={OrderList} />
+        <Route path="/customer/profile" component={CustomerProfile} />
         <Route path="/signin" component={Signin} />
         <Route path="/signup" component={Signup} />
     </div>

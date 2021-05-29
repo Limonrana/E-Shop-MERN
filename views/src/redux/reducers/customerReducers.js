@@ -28,3 +28,31 @@ export const customerSignUpReducer = (state = {}, action) => {
             return state;
     }
 };
+
+export const customerDetailsReducer = (state = { isLoading: true }, action) => {
+    switch (action.type) {
+        case actionTypes.CUSTOMER_DETAILS_REQUEST:
+            return { isLoading: true };
+        case actionTypes.CUSTOMER_DETAILS_SUCCESS:
+            return { isLoading: false, customer: action.payload };
+        case actionTypes.CUSTOMER_DETAILS_FAIL:
+            return { isLoading: false, error: action.payload };
+        default:
+            return state;
+    }
+};
+
+export const customerProfileUpdateReducer = (state = {}, action) => {
+    switch (action.type) {
+        case actionTypes.CUSTOMER_PROFILE_UPDATE_REQUEST:
+            return { isLoading: true };
+        case actionTypes.CUSTOMER_PROFILE_UPDATE_SUCCESS:
+            return { isLoading: false, success: true };
+        case actionTypes.CUSTOMER_PROFILE_UPDATE_FAIL:
+            return { isLoading: false, error: action.payload };
+        case actionTypes.CUSTOMER_PROFILE_UPDATE_RESET:
+            return {};
+        default:
+            return state;
+    }
+};
