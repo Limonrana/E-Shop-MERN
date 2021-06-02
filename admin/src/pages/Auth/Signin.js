@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IconContext } from 'react-icons';
 import * as RiIcons from 'react-icons/ri';
-import { Link, useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { Form, Input, Label } from 'reactstrap';
 import fitbit from '../../assets/svg/brands/fitbit-gray.svg';
 import flow from '../../assets/svg/brands/flow-xo-gray.svg';
@@ -9,30 +10,40 @@ import gitlab from '../../assets/svg/brands/gitlab-gray.svg';
 import google from '../../assets/svg/brands/google.svg';
 import layar from '../../assets/svg/brands/layar-gray.svg';
 import Background from '../../assets/svg/components/abstract-bg-4.svg';
+import PreLoader from '../../components/Preloader/Preloader';
+import { errorMessage } from '../../lib/Toastify';
+import { adminSignIn } from '../../redux/actions/authActions';
 
-const Login = () => {
-    const history = useHistory();
+const Login = ({ history }) => {
+    const dispatch = useDispatch();
+    const signIn = useSelector((state) => state.signIn);
+    const { isLoading, error, adminInfo } = signIn;
     const [showPassword, setShowPassword] = useState(false);
-    const [input, setInput] = useState({ email: '', password: '' });
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     const handleShowPassword = (event) => {
         setShowPassword(!showPassword);
         event.preventDefault();
     };
-    const handleInput = (event) => {
-        setInput({
-            ...input,
-            [event.target.name]: event.target.value,
-        });
-    };
 
     const handleSubmit = (event) => {
-        history.push('/admin/dashboard');
+        dispatch(adminSignIn(email, password));
         event.preventDefault();
     };
 
+    useEffect(() => {
+        if (adminInfo) {
+            history.push('/admin/dashboard');
+        }
+        if (error !== '') {
+            errorMessage(error);
+        }
+    }, [adminInfo, error, history]);
+
     return (
         <div className="Login">
+            {isLoading ? <PreLoader isLoading={isLoading} /> : null}
             <div
                 className="position-fixed top-0 right-0 left-0 bg-img-hero"
                 style={{ height: '32rem', backgroundImage: `url(${Background})` }}
@@ -94,8 +105,8 @@ const Login = () => {
                                             name="email"
                                             id="signinSrEmail"
                                             placeholder="email@address.com"
-                                            value={input.email}
-                                            onChange={handleInput}
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
                                         />
                                     </div>
 
@@ -119,8 +130,8 @@ const Login = () => {
                                                 name="password"
                                                 id="signupSrPassword"
                                                 placeholder="8+ characters required"
-                                                value={input.password}
-                                                onChange={handleInput}
+                                                value={password}
+                                                onChange={(e) => setPassword(e.target.value)}
                                             />
                                             <div
                                                 id="changePassTarget"
@@ -175,7 +186,16 @@ const Login = () => {
                                         type="submit"
                                         className="btn btn-lg btn-block btn-eshop"
                                     >
-                                        Sign in
+                                        {isLoading ? (
+                                            <div
+                                                className="spinner-border spinner-border-sm"
+                                                role="status"
+                                            >
+                                                <span className="sr-only">Loading...</span>
+                                            </div>
+                                        ) : (
+                                            'Sign in'
+                                        )}
                                     </button>
                                 </Form>
                             </div>

@@ -48,7 +48,7 @@ const Routes = () => (
             {/* Settings Routes  */}
             <Route path="/admin/settings/accounts" exact component={AccountSettings} />
             {/* Redirect Routes  */}
-            <Redirect to="/admin/dashboard" />
+            <Redirect to="/admin/signin" />
             <Redirect from="/" to="/admin/signin" />
         </Switch>
     </div>

@@ -1,13 +1,13 @@
 const express = require('express');
-const admin = require('../controllers/admin/adminController');
+const auth = require('../controllers/admin/authController');
 
 const router = express.Router();
 router
-    .get('/seeds', admin.seeds)
-    .get('/:id', admin.show)
-    .post('/signup', admin.signup)
-    .post('/signin', admin.signin)
-    .put('/:id', admin.updated)
-    .delete('/:id', admin.destroy);
+    .get('/seeds', auth.seeds)
+    .get('/:id', auth.show)
+    .post('/signup', auth.signup)
+    .post('/signin', auth.signin)
+    .put('/:id', auth.updated)
+    .delete('/:id', auth.destroy);
 
 module.exports = router;

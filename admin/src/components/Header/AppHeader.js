@@ -1,11 +1,16 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import { useState } from 'react';
+import { IconContext } from 'react-icons';
+import { AiOutlineBars } from 'react-icons/ai';
+import { useDispatch } from 'react-redux';
 import { Link, useRouteMatch } from 'react-router-dom';
 import img6 from '../../assets/img/160x160/img6.jpg';
 import logoShort from '../../assets/svg/logos/logo-short.svg';
 import logo from '../../assets/svg/logos/logo.svg';
+import { mainNavOpen } from '../../redux/actions/authActions';
 
 const AppHeader = () => {
+    const dispatch = useDispatch();
     const match = useRouteMatch([
         '/admin/signin',
         '/admin/signup',
@@ -14,6 +19,7 @@ const AppHeader = () => {
     ]);
     const [isFlod, setFold] = useState(false);
     const handleFold = () => setFold(!isFlod);
+    const menuHandler = () => dispatch(mainNavOpen());
     return (
         <>
             {!match ? (
@@ -37,20 +43,16 @@ const AppHeader = () => {
                             <button
                                 type="button"
                                 className="js-navbar-vertical-aside-toggle-invoker close mr-3"
+                                onClick={menuHandler}
                             >
-                                <i
-                                    className="tio-first-page navbar-vertical-aside-toggle-short-align"
-                                    data-toggle="tooltip"
-                                    data-placement="right"
-                                    title="Collapse"
-                                />
-                                <i
-                                    className="tio-last-page navbar-vertical-aside-toggle-full-align"
-                                    data-template='<div class="tooltip d-none d-sm-block" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>'
-                                    data-toggle="tooltip"
-                                    data-placement="right"
-                                    title="Expand"
-                                />
+                                <IconContext.Provider
+                                    value={{
+                                        color: 'balck',
+                                        className: 'navbar-vertical-menu',
+                                    }}
+                                >
+                                    <AiOutlineBars />
+                                </IconContext.Provider>
                             </button>
                         </div>
 

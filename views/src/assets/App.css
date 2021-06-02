@@ -929,7 +929,7 @@ nav .container {
   display: block;
   border-top: 1px solid #e5e5e5;
 }
-.category-section-item ul li a {
+.category-section-item ul li .category-menu-item {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -940,25 +940,30 @@ nav .container {
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
+  -webkit-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+  align-items: center;
+  padding: 20px 15px;
+}
+.category-section-item ul li .category-menu-item a {
   width: 100%;
   -webkit-transition: all 0.3s linear;
   transition: all 0.3s linear;
   font-size: 13px;
-  padding: 20px 15px;
   color: #555;
   text-decoration: none;
   font-weight: 500;
 }
-.category-section-item ul li a.self-add {
+.category-section-item ul li .category-menu-item a.self-add {
   font-weight: 600;
 }
-.category-section-item ul li a:hover {
+.category-section-item ul li .category-menu-item a:hover {
   background: rgba(0, 0, 0, 0.02);
 }
-.category-section-item ul li a span {
+.category-section-item ul li .category-menu-item span {
   border: 1px solid rgba(0, 0, 0, 0.33);
-  width: 15px;
-  height: 15px;
+  width: 20px;
+  height: 20px;
   border-radius: 3px;
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
@@ -969,9 +974,10 @@ nav .container {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  font-size: 8px;
+  font-size: 10px;
+  cursor: pointer;
 }
-.category-section-item ul li a span.in i:before {
+.category-section-item ul li .category-menu-item span.in i:before {
   content: "\f077";
 }
 .category-section-item ul li.self-new-bg {
@@ -992,6 +998,38 @@ nav .container {
 }
 .category-section-dropdown.in {
   display: block;
+}
+.category-section-item ul li .category-submenu-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: row;
+  flex-flow: row;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  width: 100%;
+  -webkit-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+  font-size: 13px;
+  padding: 20px 15px;
+}
+.category-section-item ul li a.category-submenu-item {
+  width: 100%;
+  -webkit-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+  font-size: 13px;
+  color: #555;
+  text-decoration: none;
+  font-weight: 500;
+}
+.category-section-item ul li .category-submenu-item a.self-add {
+  font-weight: 600;
+}
+.category-section-item ul li .category-submenu-item a:hover {
+  background: rgba(0, 0, 0, 0.02);
 }
 .category-slider {
   margin-top: 10px;

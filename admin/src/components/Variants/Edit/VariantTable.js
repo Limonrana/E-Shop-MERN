@@ -1,7 +1,7 @@
 import { Input, Label } from 'reactstrap';
 import TableItem from './TableItem';
 
-const VariantTable = ({ vaiants, deleteItem }) => (
+const VariantTable = ({ variants }) => (
     <div className="table-responsive datatable-custom">
         <table className="table table-borderless table-thead-bordered table-nowrap table-align-middle card-table">
             <thead className="thead-light">
@@ -17,8 +17,8 @@ const VariantTable = ({ vaiants, deleteItem }) => (
                         </div>
                     </th>
                     <th />
-                    <th className="table-column-pl-0">Size</th>
-                    <th className="table-column-pl-0">Color</th>
+                    <th className="table-column-pl-0">Variant</th>
+                    <th className="table-column-pl-0">SKU</th>
                     <th className="table-column-pl-0">Price</th>
                     <th className="table-column-pl-0">Quantity</th>
                     <th className="table-column-pl-0" />
@@ -26,8 +26,8 @@ const VariantTable = ({ vaiants, deleteItem }) => (
             </thead>
 
             <tbody id="addVariantsContainer">
-                {vaiants.map((item) => (
-                    <TableItem key={item.id} deleteItem={() => deleteItem(item.id)} />
+                {variants.map((item) => (
+                    <TableItem key={item.position} item={item} />
                 ))}
             </tbody>
         </table>

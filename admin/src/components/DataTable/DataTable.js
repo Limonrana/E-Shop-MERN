@@ -1,6 +1,6 @@
 import { Input, Label } from 'reactstrap';
 
-const DataTable = ({ items, children }) => (
+const DataTable = ({ items, handleAllSelectData, children }) => (
     <div className="table-responsive datatable-custom">
         <table
             id="datatable"
@@ -15,6 +15,7 @@ const DataTable = ({ items, children }) => (
                                 id="datatableCheckAll"
                                 type="checkbox"
                                 className="custom-control-input"
+                                onChange={handleAllSelectData}
                             />
                             <Label className="custom-control-label" htmlFor="datatableCheckAll" />
                         </div>

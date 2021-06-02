@@ -16,7 +16,6 @@ const Customer = require('../../models/web/Customer');
         // If Customer Not Found
         if (!customer) {
            return res.status(401).json({
-               type: 'error',
                message: 'Autheticaion failed!',
            });
        }
@@ -24,7 +23,6 @@ const Customer = require('../../models/web/Customer');
        const validatePass = await bcrypt.compare(req.body.password, customer.password);
         if (!validatePass) {
             return res.status(401).json({
-                type: 'error',
                 message: 'Autheticaion failed!',
             });
         }
@@ -40,7 +38,7 @@ const Customer = require('../../models/web/Customer');
         });
      } catch (err) {
         return res.status(500).json({
-            error: 'There was a server side error!',
+            message: 'There was a server side error!',
         });
      }
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Col, Container, Row } from 'reactstrap';
 import CategoryMenu from '../components/CategoryMenu/CategoryMenu';
@@ -11,13 +11,8 @@ import { listProducts } from '../redux/actions/productActions';
 
 const Home = () => {
     const dispatch = useDispatch();
-    const [isOpenCategoryMenu, setOpenCategoryMenu] = useState(false);
     const productList = useSelector((state) => state.productList);
     const { isLoading, error, products } = productList;
-
-    const openCategoryMenu = () => {
-        setOpenCategoryMenu(!isOpenCategoryMenu);
-    };
 
     useEffect(() => {
         dispatch(listProducts());
@@ -32,10 +27,7 @@ const Home = () => {
         content = (
             <Row>
                 <Col xs="3" sm="0" md="3" className="col-reponsive-hide">
-                    <CategoryMenu
-                        openCategoryMenu={openCategoryMenu}
-                        isOpenCategoryMenu={isOpenCategoryMenu}
-                    />
+                    <CategoryMenu />
                 </Col>
                 <Col xs="9" sm="12" md="9" className="col-reponsive">
                     <div className="category-full-content">

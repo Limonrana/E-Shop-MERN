@@ -2,7 +2,7 @@ import { Input, Label } from 'reactstrap';
 
 const CustomSelect = ({ label, value, name, handle }) => (
     <div className="form-group">
-        <Label for={name} className="input-label">
+        <Label htmlFor={name} className="input-label">
             {label}
         </Label>
 

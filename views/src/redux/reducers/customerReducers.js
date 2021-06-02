@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import * as actionTypes from '../constants/customerConstants';
 
 export const customerSignInReducer = (state = {}, action) => {

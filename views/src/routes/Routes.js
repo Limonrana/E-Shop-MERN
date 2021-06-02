@@ -29,7 +29,7 @@ const Layout = () => (
         <Route path="/order/:id" component={OrderSuccess} />
         {/* Customer Routes */}
         <PrivateRoute path="/customer/orders" component={OrderList} />
-        <Route path="/customer/profile" component={CustomerProfile} />
+        <PrivateRoute path="/customer/profile" component={CustomerProfile} />
         <Route path="/signin" component={Signin} />
         <Route path="/signup" component={Signup} />
     </div>

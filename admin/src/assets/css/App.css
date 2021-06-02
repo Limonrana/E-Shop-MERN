@@ -6736,6 +6736,16 @@ a.btn.btn-icon.btn-sm.btn-ghost-white.rounded-circle:hover {
   padding: 5px !important;
 }
 
+.close {
+  float: right;
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+  line-height: 1;
+  color: #000000 !important;
+  text-shadow: 0 1px 0 #fff;
+  opacity: 0.5;
+}
+
 @media screen and (min-device-width: 320px) and (max-device-width: 1199px) {
   .navbar-vertical-aside-show-xl .main .App .Login {
     margin-left: 0rem !important;

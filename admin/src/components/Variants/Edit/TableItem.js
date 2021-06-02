@@ -1,9 +1,8 @@
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 import { RiDeleteBin6Line, RiEdit2Line } from 'react-icons/ri';
 import { Input, Label } from 'reactstrap';
-import img7 from '../../../assets/img/400x400/img7.jpg';
 
-const TableItem = ({ deleteItem }) => (
+const TableItem = ({ item }) => (
     <tr>
         <td className="table-column-pr-0">
             <div className="custom-control custom-checkbox">
@@ -17,13 +16,19 @@ const TableItem = ({ deleteItem }) => (
             </div>
         </td>
         <th>
-            <img className="avatar" src={img7} alt="img7" />
+            <img className="avatar" src={item.image} alt={item.title} />
         </th>
         <th className="table-column-pl-0">
-            <Input type="text" className="form-control" value="S" onChange={() => 'okay'} />
+            <Input
+                type="text"
+                className="form-control"
+                value={item.title}
+                onChange={() => 'okay'}
+                readOnly
+            />
         </th>
         <th className="table-column-pl-0">
-            <Input type="text" className="form-control" value="White" onChange={() => 'okay'} />
+            <Input type="text" className="form-control" value={item.sku} onChange={() => 'okay'} />
         </th>
         <th className="table-column-pl-0">
             <div className="input-group input-group-merge">
@@ -33,7 +38,7 @@ const TableItem = ({ deleteItem }) => (
                 <Input
                     type="text"
                     className="form-control pl-8"
-                    value="45.00"
+                    value={item.price.toFixed(2)}
                     onChange={() => 'okay'}
                 />
             </div>
@@ -43,7 +48,7 @@ const TableItem = ({ deleteItem }) => (
                 <Input
                     type="number"
                     className="js-result form-control input-group-quantity-counter-control"
-                    value="10"
+                    value={item.qty}
                     onChange={() => 'okay'}
                 />
 
@@ -62,7 +67,7 @@ const TableItem = ({ deleteItem }) => (
                 <button className="btn btn-white" type="button">
                     <RiEdit2Line /> Edit
                 </button>
-                <button className="btn btn-white" type="button" onClick={deleteItem}>
+                <button className="btn btn-white" type="button">
                     <RiDeleteBin6Line />
                 </button>
             </div>

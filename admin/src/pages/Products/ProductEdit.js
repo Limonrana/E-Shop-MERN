@@ -86,7 +86,7 @@ const ProductEdit = () => {
                                 handleVideoModal={handleVideoModal}
                                 isGallery
                             />
-                            <ProductVariants />
+                            <ProductVariants isEdit />
                         </div>
                         <div className="col-lg-4">
                             <ProductPricing

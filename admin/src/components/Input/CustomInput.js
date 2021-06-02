@@ -4,16 +4,18 @@ import { Input, Label } from 'reactstrap';
 
 const CustomInput = ({ label, icon, type, placeholder, value, handle, name }) => (
     <div className="form-group">
-        <Label htmlFor={name} className="input-label">
-            {label}{' '}
-            {icon ? (
-                <span title={icon}>
-                    <IconContext.Provider value={{ className: 'text-body ml-1' }}>
-                        <BiHelpCircle />
-                    </IconContext.Provider>
-                </span>
-            ) : null}
-        </Label>
+        {label ? (
+            <Label htmlFor={name} className="input-label">
+                {label}{' '}
+                {icon ? (
+                    <span title={icon}>
+                        <IconContext.Provider value={{ className: 'text-body ml-1' }}>
+                            <BiHelpCircle />
+                        </IconContext.Provider>
+                    </span>
+                ) : null}
+            </Label>
+        ) : null}
 
         <Input
             type={type}

@@ -4,7 +4,7 @@ import { AiOutlineDelete } from 'react-icons/ai';
 import { RiTableFill } from 'react-icons/ri';
 import FilterToggle from './FilterToggle';
 
-const Filter = ({ items, handleFilter }) => {
+const Filter = ({ items, handleFilter, showAction }) => {
     const [showFilter, setShowFilter] = useState(false);
 
     const handleShowFilter = () => {
@@ -14,10 +14,15 @@ const Filter = ({ items, handleFilter }) => {
     return (
         <div className="col-lg-6">
             <div className="d-sm-flex justify-content-sm-end align-items-sm-center">
-                <div className="mr-2 mb-2 mb-sm-0" style={{ display: 'none' }}>
+                <div
+                    className="mr-2 mb-2 mb-sm-0"
+                    style={{ display: `${showAction.length !== 0 ? 'block' : 'none'}` }}
+                >
                     <div className="d-flex align-items-center">
                         <span className="font-size-sm mr-3">
-                            <span id="datatableCounter">0</span>
+                            <span id="datatableCounter">
+                                <strong>{showAction.length}</strong>
+                            </span>{' '}
                             Selected
                         </span>
                         <a className="btn btn-sm btn-outline-danger" href="#javascript">

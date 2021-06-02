@@ -1,6 +1,5 @@
 import CustomEditor from '../Input/CustomEditor';
 import CustomInput from '../Input/CustomInput';
-import CustomInputGroup from '../Input/CustomInputGroup';
 
 const ProductInfo = ({ input, handleProductInput, onEditorStateChange }) => (
     <div className="card mb-3 mb-lg-5">
@@ -29,9 +28,12 @@ const ProductInfo = ({ input, handleProductInput, onEditorStateChange }) => (
                     />
                 </div>
                 <div className="col-sm-6">
-                    <CustomInputGroup
-                        value={input.weight}
+                    <CustomInput
+                        label="Weight"
+                        type="text"
                         name="weight"
+                        placeholder="0.0"
+                        value={input.weight}
                         handle={handleProductInput}
                     />
                 </div>

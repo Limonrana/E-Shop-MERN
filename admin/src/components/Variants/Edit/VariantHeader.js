@@ -4,7 +4,7 @@ const VariantHeader = ({ handleAddVariant }) => (
     <div className="card-header">
         <div className="row justify-content-between align-items-center flex-grow-1">
             <div className="col-12 col-sm mb-3 mb-sm-0">
-                <h4 className="card-header-title">Variants</h4>
+                <h4 className="card-header-title">Preview</h4>
             </div>
 
             <div className="col-auto">

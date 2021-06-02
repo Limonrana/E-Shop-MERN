@@ -49,7 +49,7 @@ adminSchema.methods = {
                 role: this.role
             },
             process.env.JWT_SECRET_KEY,
-            { expiresIn: '3h' }
+            { expiresIn: '24h' }
         );
         return token;
     }

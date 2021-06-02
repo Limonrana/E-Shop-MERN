@@ -1,24 +1,38 @@
-import { Input } from 'reactstrap';
+import { RiDeleteBin6Line } from 'react-icons/ri';
+import CreatableMultiSelect from '../../Input/CreatableMultiSelect';
+import CustomInput2 from '../../Input/CustomInput2';
 
-const OptionItem = () => (
+const OptionItem = ({ id, options, optionsHandler, optionsValueHandler, optionRemoveHandler }) => (
     <div className="form-group">
         <div className="row">
-            <div className="col-4">
-                <div className="input-group-prepend">
-                    <Input type="select" className="js-select2-custom custom-select">
-                        <option value="Size">Size</option>
-                        <option value="Color">Color</option>
-                        <option value="Material">Material</option>
-                        <option value="Style">Style</option>
-                        <option value="Title">Title</option>
-                    </Input>
-                </div>
+            <div className="col-3">
+                <CustomInput2
+                    id={id}
+                    type="text"
+                    name="option"
+                    placeholder="Option Name..."
+                    handle={optionsHandler}
+                />
             </div>
 
             <div className="col-8">
-                <Input type="select" className="js-select2-custom custom-select">
-                    <option label="empty" />
-                </Input>
+                <CreatableMultiSelect
+                    id={id}
+                    name="values"
+                    options={options.value}
+                    handleChange={optionsValueHandler}
+                />
+            </div>
+            <div className="col-1 text-right">
+                <div className="btn-group" role="group" aria-label="Edit group">
+                    <button
+                        className="btn btn-white"
+                        type="button"
+                        onClick={() => optionRemoveHandler(options.id)}
+                    >
+                        <RiDeleteBin6Line />
+                    </button>
+                </div>
             </div>
         </div>
     </div>

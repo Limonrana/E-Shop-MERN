@@ -1,6 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './assets/css/App.css';
 import './assets/css/theme.minc619.css';
 import AppFooter from './components/Footer/AppFooter';
@@ -9,24 +12,33 @@ import SideNavBar from './components/Header/SideNavBar';
 import Routes from './routes/Routes';
 
 function App() {
-    const [navMini, setNavMini] = useState(false);
+    const { isOpenMainNav } = useSelector((state) => state.isOpenMainNav);
+    let classAll = 'footer-offset has-navbar-vertical-aside navbar-vertical-aside-show-xl';
 
-    const handleNavMini = () => setNavMini(!navMini);
+    if (isOpenMainNav) {
+        classAll =
+            'footer-offset has-navbar-vertical-aside navbar-vertical-aside-show-xl navbar-vertical-aside-mini-mode';
+    }
     return (
-        <div
-            className={
-                navMini
-                    ? 'footer-offset has-navbar-vertical-aside navbar-vertical-aside-show-xl navbar-vertical-aside-mini-mode'
-                    : 'footer-offset has-navbar-vertical-aside navbar-vertical-aside-show-xl'
-            }
-        >
+        <div className={classAll}>
             <BrowserRouter>
                 <AppHeader />
                 <SideNavBar />
                 <main id="content" className="main">
-                    <Routes handleNavMini={handleNavMini} navMini={navMini} />
+                    <Routes />
                     <AppFooter />
                 </main>
+                <ToastContainer
+                    position="bottom-center"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable={false}
+                    pauseOnHover
+                />
             </BrowserRouter>
         </div>
     );
