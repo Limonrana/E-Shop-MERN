@@ -2,7 +2,7 @@ import { IconContext } from 'react-icons';
 import { BiHelpCircle } from 'react-icons/bi';
 import { Input, Label } from 'reactstrap';
 
-const CustomInput = ({ label, icon, type, placeholder, value, handle, name }) => (
+const CustomInput = ({ label, icon, type, name, placeholder, value, handle }) => (
     <div className="form-group">
         {label ? (
             <Label htmlFor={name} className="input-label">

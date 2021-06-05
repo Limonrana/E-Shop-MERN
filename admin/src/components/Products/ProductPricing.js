@@ -19,10 +19,21 @@ const ProductPricing = ({ input, handleProductInput }) => (
 
             <hr className="my-4" />
 
+            <CustomInput
+                label="Discount Price (Optional)"
+                type="text"
+                placeholder="0.00"
+                value={input.discountPrice}
+                name="discountPrice"
+                handle={handleProductInput}
+            />
+
+            <hr className="my-4" />
+
             <CustomToggole
                 label="Availability"
-                value={input.isAvailabile}
-                name="isAvailabile"
+                value={input.isAvailable}
+                name="isAvailable"
                 handleToggle={handleProductInput}
             />
         </div>

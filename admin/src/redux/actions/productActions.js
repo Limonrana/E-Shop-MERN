@@ -37,3 +37,26 @@ export const detailsProduct = (id) => async (dispatch) => {
         });
     }
 };
+
+export const createProduct = (product) => async (dispatch, getState) => {
+    dispatch({ type: productActions.PRODUCT_CREATE_REQUEST, payload: product });
+    try {
+        const {
+            signIn: { adminInfo },
+        } = getState();
+        const { data } = await Axios.post('/api/product', product, {
+            headers: {
+                Authorization: `Bearer ${adminInfo.token}`,
+            },
+        });
+        dispatch({ type: productActions.PRODUCT_CREATE_SUCCESS, payload: data });
+    } catch (error) {
+        dispatch({
+            type: productActions.PRODUCT_CREATE_FAIL,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message,
+        });
+    }
+};

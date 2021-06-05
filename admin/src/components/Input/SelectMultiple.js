@@ -1,7 +1,7 @@
-import CreatableSelect from 'react-select/creatable';
+import Select from 'react-select';
 import { Label } from 'reactstrap';
 
-const CreatableMultiSelect = ({ id, name, label, options, handleChange }) => {
+const SelectMultiple = ({ id, name, label, options, handle }) => {
     const theme = { spacing: { baseUnit: 5, controlHeight: 20 } };
     return (
         <div className="form-group">
@@ -10,18 +10,20 @@ const CreatableMultiSelect = ({ id, name, label, options, handleChange }) => {
                     {label}
                 </Label>
             ) : null}
-            <CreatableSelect
+            <Select
                 placeholder="Separate options for click on create OR press Enter!"
                 styles={{ minHeight: '42px' }}
                 theme={theme}
                 isMulti
-                value={options}
+                options={options}
                 data-id={id}
                 name={name}
-                onChange={handleChange}
+                className="basic-multi-select"
+                classNamePrefix="select"
+                onChange={handle}
             />
         </div>
     );
 };
 
-export default CreatableMultiSelect;
+export default SelectMultiple;

@@ -25,3 +25,18 @@ export const productDetailReducer = (state = { isLoading: true, product: [] }, a
             return state;
     }
 };
+
+export const productCreateReducer = (state = {}, action) => {
+    switch (action.type) {
+        case actionTypes.PRODUCT_CREATE_REQUEST:
+            return { isLoading: true };
+        case actionTypes.PRODUCT_CREATE_SUCCESS:
+            return { isLoading: false, success: true, product: action.payload };
+        case actionTypes.PRODUCT_CREATE_FAIL:
+            return { isLoading: false, error: action.payload };
+        case actionTypes.PRODUCT_CREATE_REST:
+            return {};
+        default:
+            return state;
+    }
+};

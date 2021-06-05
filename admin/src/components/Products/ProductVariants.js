@@ -19,11 +19,11 @@ const ProductVariants = ({
             optionAddHandler={optionAddHandler}
             optionRemoveHandler={optionRemoveHandler}
         />
-        {variants ? (
+        {variants.length > 0 ? (
             <>
-                <VariantHeader />
+                <VariantHeader isAdd={false} />
                 <VariantTable variants={variants} />
-                <VaraintFooter />
+                <VaraintFooter isAdd={false} />
             </>
         ) : null}
     </div>

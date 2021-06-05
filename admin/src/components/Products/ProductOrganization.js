@@ -1,39 +1,62 @@
-import CustomInput from '../Input/CustomInput';
+import CreatableMultiSelect from '../Input/CreatableMultiSelect';
 import CustomSelect from '../Input/CustomSelect';
+import SelectMultiple from '../Input/SelectMultiple';
 
-const ProductOrganization = ({ input, handleProductInput }) => (
-    <div className="card">
-        <div className="card-header">
-            <h4 className="card-header-title">Organization</h4>
+const ProductOrganization = ({ input, subcategory, handleProductInput, handleMultipleSelect }) => {
+    const tagsConvert = () => {
+        const tagData = input.tag;
+        const getData = [];
+        for (let i = 0; i < tagData.length; i += 1) {
+            const element = { label: tagData[i], value: tagData[i] };
+            getData.push(element);
+        }
+        return getData;
+    };
+    return (
+        <div className="card">
+            <div className="card-header">
+                <h4 className="card-header-title">Organization</h4>
+            </div>
+
+            <div className="card-body">
+                <CustomSelect
+                    label="Seller"
+                    value={input.seller}
+                    name="seller"
+                    handle={handleProductInput}
+                />
+
+                <CustomSelect
+                    label="Category"
+                    value={input.category}
+                    name="category"
+                    handle={handleProductInput}
+                />
+
+                <SelectMultiple
+                    label="SubCategory"
+                    options={subcategory}
+                    name="subcategory"
+                    handle={handleMultipleSelect}
+                />
+
+                {/* <CustomSelect
+                    label="SubCategory"
+                    value={input.subcategory}
+                    name="subcategory"
+                    handle={handleProductInput}
+                /> */}
+
+                <CreatableMultiSelect
+                    id="1"
+                    name="tag"
+                    label="Tag"
+                    options={tagsConvert()}
+                    handleChange={handleMultipleSelect}
+                />
+            </div>
         </div>
-
-        <div className="card-body">
-            <CustomInput
-                label="Seller"
-                type="text"
-                name="seller"
-                placeholder="eg. Nike"
-                value={input.seller}
-                handle={handleProductInput}
-            />
-
-            <CustomSelect
-                label="Category"
-                value={input.category}
-                name="category"
-                handle={handleProductInput}
-            />
-
-            <CustomSelect
-                label="Collections"
-                value={input.collection}
-                name="collection"
-                handle={handleProductInput}
-            />
-
-            <CustomSelect label="Tag" value={input.tag} name="tag" handle={handleProductInput} />
-        </div>
-    </div>
-);
+    );
+};
 
 export default ProductOrganization;

@@ -17,7 +17,7 @@ const ProductInfo = ({ input, handleProductInput, onEditorStateChange }) => (
                 handle={handleProductInput}
             />
             <div className="row">
-                <div className="col-sm-6">
+                <div className="col-sm-4">
                     <CustomInput
                         label="SKU"
                         type="text"
@@ -27,13 +27,23 @@ const ProductInfo = ({ input, handleProductInput, onEditorStateChange }) => (
                         handle={handleProductInput}
                     />
                 </div>
-                <div className="col-sm-6">
+                <div className="col-sm-4">
                     <CustomInput
                         label="Weight"
                         type="text"
                         name="weight"
                         placeholder="0.0"
                         value={input.weight}
+                        handle={handleProductInput}
+                    />
+                </div>
+                <div className="col-sm-4">
+                    <CustomInput
+                        label="Quantity"
+                        type="text"
+                        name="quantity"
+                        placeholder="45"
+                        value={input.quantity}
                         handle={handleProductInput}
                     />
                 </div>
